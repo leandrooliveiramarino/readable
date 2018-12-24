@@ -1275,13 +1275,15 @@ body.open .site-content {
     margin: 9px;
     border-top: 5px solid #242424;
     border-bottom: 5px solid #242424;
-    cursor: pointer;
 }
 
 .card:hover {
     border: 1px solid #009688;
     border-top: 5px solid #009688;
     border-bottom: 5px solid #009688;
+}
+.card .card__content {
+    cursor: pointer;
 }
 
 .card .card__content .content__title {
@@ -1378,6 +1380,7 @@ body.open .site-content {
  */
 
 .modal {
+    display: none;
     position: fixed;
     left: 0;
     top: 0;
