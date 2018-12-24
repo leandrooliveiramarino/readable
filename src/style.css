@@ -419,7 +419,7 @@ body.open .site-content {
 }
 
 .read-more {
-    background-image: url('images/arrow.png');
+    background-image: url('/images/arrow.png');
     width: 30px;
     height: 30px;
     background-size: 30px;
@@ -1337,6 +1337,12 @@ body.open .site-content {
     position: absolute;
     width: 60%;
     height: 190px;
+    transition: width 0.7s;
+}
+
+.header--100 {
+    width: 100%;
+    transition: width 0.7s;
 }
 
 @media screen and (max-width: 1220px) {
@@ -1372,7 +1378,6 @@ body.open .site-content {
  */
 
 .modal {
-    display: none;
     position: fixed;
     left: 0;
     top: 0;
@@ -1390,7 +1395,6 @@ body.open .site-content {
 .modal__content {
   background-color: #fefefe;
   margin: 30px auto;
-  padding: 20px;
   border-radius: 4px;
   max-width: 500px;
   border: 1px solid #00695f;
@@ -1421,6 +1425,72 @@ body.open .site-content {
     text-transform: uppercase;
 }
 
+.modal__remove {
+    float: right;
+}
+
+.modal__additional-options {
+    background-color: #00695f;
+    height: 35px;
+}
+
+.additional-options__remove {
+    border: 0;
+    background-color: transparent;
+    color: #FFF;
+    font-size: 18px;
+    padding: 0;
+    margin: 10px 0 0 20px;
+    cursor: pointer;
+    float: left;
+}
+
+.additional-options__edit {
+    border: 0;
+    background-color: transparent;
+    color: #FFF;
+    font-size: 18px;
+    padding: 0;
+    margin: 10px 20px 0 0;
+    cursor: pointer;
+    float: right;
+}
+
+.modal__message {
+    background-color: #00695f;
+    height: 35px;
+    border: 0;
+    color: #FFF;
+    font-size: 15px;
+    line-height: 35px;
+    padding: 0;
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+.message__option {
+    float: right;
+    font-size: 15px;
+    cursor: pointer;
+    margin: 0;
+    margin-right: 20px;
+    display: inline-block;
+    background-color: transparent;
+    color: #FFF;
+    border: 0;
+    line-height: 35px;
+    padding: 0;
+}
+
+.message__option:hover {
+    text-decoration: underline;
+}
+
+.additional-options__remove:hover,
+.additional-options__edit:hover {
+    text-decoration: underline;
+}
+
 /**
  * General
  */
@@ -1447,14 +1517,25 @@ body.open .site-content {
     color: black;
 }
 
+.form-message {
+    padding: 20px;
+}
+
 .form-message__submit {
     float: right;
     height: 40px;
-    width: 100%;
+    width: 150px;
     border: 2px solid;
     background-color: #FFF;
     cursor: pointer;
     border-radius: 5px;
+    font-family: 'Montserrat', sans-serif, Arial;
+}
+
+.form-message__submit:hover {
+    border-color: #00695f;
+    color: #FFF;
+    background-color: #00695f;
 }
 
 .options {
