@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Options = () => {
   return (
@@ -16,7 +17,7 @@ const Options = () => {
           <option value='CRESCENT'>Crescent</option>
         </select>
       </form>
-      <a href='new.html' className='options__new-post'>New Post</a>
+      <Link to='/post/new' className='options__new-post'>New Post</Link>
     </div>
   );
 }

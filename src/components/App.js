@@ -20,7 +20,8 @@ class App extends Component {
           <LoadingBar/>
           <Sidebar/>
           <Content/>
-          <PostModal/>
+          <Route exact path='/post/new' component={PostModal}/>
+          <Route path='/post/:id/edit' component={PostModal}/>
         </Fragment>
       </Router>
     );

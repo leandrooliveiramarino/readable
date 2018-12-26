@@ -8,14 +8,14 @@ const Sidebar = (props) => {
         <div className='menu-right-part'>
           <div className='logo-holder'>
             <Link to='/'>
-              <img src='images/logo.png' alt='Readable'/>
+              <img src='/images/logo.png' alt='Readable'/>
             </Link>
           </div>
           <div className='social-holder'>
             <div className='social-list'>
             {
               Object.keys(props.categories).map(index => (
-                <Link key={props.categories[index].name} to={props.categories[index].path}><img src={`images/${props.categories[index].name}-icon.png`} width='25' height='25'/></Link>
+                <Link key={props.categories[index].name} to={props.categories[index].path}><img src={`/images/${props.categories[index].name}-icon.png`} width='25' height='25'/></Link>
               ))
             }
             </div>
