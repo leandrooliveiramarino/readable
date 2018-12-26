@@ -12,11 +12,12 @@ class Post extends Component {
 
   render() {
     return (
-      <div className='card' onClick={this.showPostMessage}>
+      <div
+        className={`card ${this.props.postMessage.postId === this.props.id && 'card--active'}`}
+        onClick={this.showPostMessage}
+      >
         <div className='card__content'>
-          <Link to={`/posts/${this.props.id}`}>
-            <h2 className='content__title'>{limitCharacters(this.props.title, 25)}</h2>
-          </Link>
+          <h2 className='content__title'>{limitCharacters(this.props.title, 25)}</h2>
           <small className='content__info'><b>Posted by:</b> {this.props.author}</small>
           <small className='content__info'><b>At</b> {this.props.timestamp}</small>
           <small className='content__info'><b>On</b> <Link to={`/${this.props.category}`}>{this.props.category}</Link></small>
@@ -39,4 +40,10 @@ class Post extends Component {
   }
 }
 
-export default connect()(Post);
+function mapStateToProps({ postMessage }) {
+  return {
+    postMessage
+  };
+}
+
+export default connect(mapStateToProps)(Post);
