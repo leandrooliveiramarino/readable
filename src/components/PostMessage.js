@@ -1,8 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const PostMessage = () => {
+const PostMessage = (props) => {
   return (
-    <div className='featured-image-holder show-post-message'>
+    <div className={`featured-image-holder ${props.postMessage.show && 'show-post-message'}`}>
       <div className='featured-post-image'>
         <blockquote className='post-message'>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -17,4 +18,10 @@ const PostMessage = () => {
   );
 }
 
-export default PostMessage;
+function mapStateToProps({ postMessage }) {
+  return {
+    postMessage
+  };
+}
+
+export default connect(mapStateToProps)(PostMessage);
