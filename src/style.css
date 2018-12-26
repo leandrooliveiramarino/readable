@@ -457,6 +457,7 @@ body.open .site-content {
     width: 0;
     float: right;
     transition: width 0.7s;
+    cursor: pointer;
 }
 
 .show-post-message {
@@ -1492,6 +1493,18 @@ body.open .site-content {
 .additional-options__remove:hover,
 .additional-options__edit:hover {
     text-decoration: underline;
+}
+
+/**
+ * Post Message
+ */
+.post-message__details {
+    position: absolute;
+    bottom: 50px;
+    color: #009688;
+    font-variant: small-caps;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 /**

@@ -6,7 +6,9 @@ export default function postMessage(state = {}, action) {
     case SHOW_POST_MESSAGE:
       return {
         ...state,
-        show: true
+        show: true,
+        message: action.message,
+        postId: action.postId
       }
     case HIDE_POST_MESSAGE:
       return {

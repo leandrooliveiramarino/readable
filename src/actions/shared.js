@@ -12,7 +12,6 @@ export function handleInitialData() {
         dispatch(getCategories(categories));
         dispatch(getPosts(posts));
         dispatch(hideLoading());
-        dispatch(showPostMessage())
       });
   }
 }
