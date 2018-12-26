@@ -3,6 +3,7 @@ import { limitCharacters } from '../utils/helper.js';
 import { showPostMessage } from '../actions/postMessage';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { formatDate } from '../utils/helper';
 
 class Post extends Component {
 
@@ -19,7 +20,7 @@ class Post extends Component {
         <div className='card__content'>
           <h2 className='content__title'>{limitCharacters(this.props.title, 25)}</h2>
           <small className='content__info'><b>Posted by:</b> {this.props.author}</small>
-          <small className='content__info'><b>At</b> {this.props.timestamp}</small>
+          <small className='content__info'><b>At</b> {formatDate(this.props.timestamp)}</small>
           <small className='content__info'><b>On</b> <Link to={`/${this.props.category}`}>{this.props.category}</Link></small>
           <hr />
           <div className='card__text'>

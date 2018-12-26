@@ -1478,6 +1478,10 @@ body.open .site-content {
     cursor: pointer;
 }
 
+.modal__message--danger {
+    background-color: #F00;
+}
+
 .message__option {
     float: right;
     font-size: 15px;
@@ -1524,6 +1528,10 @@ body.open .site-content {
     font-size: 20px;
     line-height: 25px;
     text-transform: uppercase;
+}
+
+.form-control--danger {
+    border-color: red !important;
 }
 
 .form-select {
