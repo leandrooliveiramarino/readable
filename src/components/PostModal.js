@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ModalMessage from './ModalMessage';
 import { Link, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { firstLetterToUppercase } from '../utils/helper';
 
 class PostModal extends Component {
   state = {
@@ -61,6 +63,7 @@ class PostModal extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className='modal' id='modal'>
         <div className='modal__content'>
@@ -120,9 +123,15 @@ class PostModal extends Component {
                 onChange={this.handleChange}
                 value={this.state.form.category}
               >
-                <option value='react'>React</option>
-                <option value='redux'>Redux</option>
-                <option value='udacity'>Udacity</option>
+              {
+                this.props.categories.map(category =>
+                  <option
+                    key={`${category}`}
+                    value={`${category}`}
+                  >{`${firstLetterToUppercase(category)}`}
+                  </option>
+                )
+              }
               </select>
               <button className='form-message__submit'>Submit</button>
             </form>
@@ -143,4 +152,10 @@ class PostModal extends Component {
   }
 }
 
-export default PostModal;
+function mapStateToProps({ categories }) {
+  return {
+    categories: Object.keys(categories).map(index => categories[index].name)
+  }
+}
+
+export default connect(mapStateToProps)(PostModal);

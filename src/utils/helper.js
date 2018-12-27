@@ -12,3 +12,5 @@ export const formatDate = (timestamp) => {
 export const generateUID = () => {
   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 }
+
+export const firstLetterToUppercase = text => text.charAt(0).toUpperCase() + text.slice(1);
