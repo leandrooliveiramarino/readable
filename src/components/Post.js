@@ -1,14 +1,33 @@
 import React, { Component } from 'react';
 import { limitCharacters } from '../utils/helper.js';
 import { showPostMessage } from '../actions/postMessage';
+import { handleUpVote, handleDownVote } from '../actions/posts';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { formatDate } from '../utils/helper';
 
 class Post extends Component {
 
-  showPostMessage = () => {
-    this.props.dispatch(showPostMessage(this.props));
+  showPostMessage = e => {
+    const clickedElement = e.target;
+
+    /**
+     * Ao clicar nos elementos discriminados na constante "exceptParents", o evento de exibir a mensagem não será despachado
+     */
+    const exceptParents = ['.card__score', '.card__comments'];
+    const willShowPostMessage = !exceptParents.filter(element => clickedElement.closest(element)).length;
+
+    if(willShowPostMessage) {
+      this.props.dispatch(showPostMessage(this.props));
+    }
+  }
+
+  upVote = () => {
+    this.props.dispatch(handleUpVote(this.props.id));
+  }
+
+  downVote = () => {
+    this.props.dispatch(handleDownVote(this.props.id));
   }
 
   render() {
@@ -28,9 +47,9 @@ class Post extends Component {
           </div>
         </div>
         <div className='card__score'>
-          <i className='fa fa-angle-up score__score-up'></i>
+          <i className='fa fa-angle-up score__score-up' onClick={this.upVote}></i>
           <span className='score__number'>{this.props.voteScore}</span>
-          <i className='fa fa-angle-down score__score-down'></i>
+          <i className='fa fa-angle-down score__score-down' onClick={this.downVote}></i>
         </div>
         <div className='card__comments'>
           <i className='fa fa-comments'></i>

@@ -1,4 +1,4 @@
-import { GET_POSTS, ADD_POST } from '../actions/posts';
+import { GET_POSTS, ADD_POST, UP_VOTE, DOWN_VOTE } from '../actions/posts';
 
 export default function posts(state = {}, action) {
   switch(action.type) {
@@ -12,7 +12,23 @@ export default function posts(state = {}, action) {
         ...state,
         [action.post.id]: action.post
       }
-      default:
-        return state;
+    case UP_VOTE:
+      return {
+        ...state,
+        [action.postId]: {
+          ...state[action.postId],
+          voteScore: ++state[action.postId].voteScore
+        }
+      }
+    case DOWN_VOTE:
+      return {
+        ...state,
+        [action.postId]: {
+          ...state[action.postId],
+          voteScore: --state[action.postId].voteScore
+        }
+      }
+    default:
+      return state;
   }
 }

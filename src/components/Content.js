@@ -5,7 +5,6 @@ import Header from './Header';
 import { connect } from 'react-redux';
 
 const Content = (props) => {
-  console.log(props);
   return (
     <div id='content' className='site-content'>
       <Header/>

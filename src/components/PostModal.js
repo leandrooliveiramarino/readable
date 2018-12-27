@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ModalMessage from './ModalMessage';
-import { Link, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { firstLetterToUppercase } from '../utils/helper';
 

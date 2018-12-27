@@ -15,7 +15,14 @@ const Sidebar = (props) => {
             <div className='social-list'>
             {
               Object.keys(props.categories).map(index => (
-                <Link key={props.categories[index].name} to={props.categories[index].path}><img src={`/images/${props.categories[index].name}-icon.png`} width='25' height='25'/></Link>
+                <Link key={props.categories[index].name} to={props.categories[index].path}>
+                  <img
+                    src={`/images/${props.categories[index].name}-icon.png`}
+                    width='25'
+                    height='25'
+                    alt={props.categories[index].name}
+                  />
+                </Link>
               ))
             }
             </div>

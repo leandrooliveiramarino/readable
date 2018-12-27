@@ -1,5 +1,4 @@
-import { SHOW_POST_MESSAGE } from '../actions/postMessage';
-import { HIDE_POST_MESSAGE } from '../actions/postMessage';
+import { SHOW_POST_MESSAGE, HIDE_POST_MESSAGE } from '../actions/postMessage';
 
 export default function postMessage(state = {}, action) {
   switch(action.type) {

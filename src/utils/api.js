@@ -42,7 +42,15 @@ const getPosts = () =>
     }
   })
   .then(res => res.json())
-  .then(data => data);
+  .then(data => data.reduce((carry, post) => {
+      if(!carry) {
+        return {
+          [post.id]: post
+        }
+      }
+      carry[post.id] = post;
+      return carry;
+    }, null));
 
 export const savePost = post =>
   fetch(`${api}/posts`, {
@@ -52,6 +60,20 @@ export const savePost = post =>
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(post)
+  })
+  .then(res => res.json())
+  .then(data => data);
+
+export const updateVote = (postId, option) =>
+  fetch(`${api}/posts/${postId}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      option
+    })
   })
   .then(res => res.json())
   .then(data => data);
