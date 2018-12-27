@@ -1,21 +1,25 @@
 import React from 'react';
-import Post from './Post';
 import PostMessage from './PostMessage';
+import PostList from './PostList';
 import Header from './Header';
 import { connect } from 'react-redux';
+import { withRouter, Route } from 'react-router-dom';
 
 const Content = props => {
   return (
     <div id='content' className='site-content'>
       <Header/>
       <div id='blog-wrapper' className={`${!props.postMessage.show ? 'blog-wrapper--100' : ''}`}>
-        <div className={`blog-holder center-relative ${!props.postMessage.show ? 'blog-holder--90' : ''}`}>
-          {
-            Object.keys(props.posts).map(index => (
-              <Post key={props.posts[index].id} {...props.posts[index]} />
-            ))
-          }
-        </div>
+        {
+          Object.keys(props.categories).map(index =>
+            <Route
+              key={`${props.categories[index].path}`}
+              path={`/${props.categories[index].path}`}
+              render={() => <PostList category={props.categories[index].name}/>}
+            />
+          )
+        }
+        <Route exact path='/' render={() => <PostList category={null}/>} />
         <div className='clear'></div>
       </div>
       <PostMessage/>
@@ -24,11 +28,11 @@ const Content = props => {
   );
 }
 
-function mapStateToProps({ posts, postMessage }) {
+function mapStateToProps({ categories, postMessage }) {
   return {
-    posts,
-    postMessage
+    postMessage,
+    categories
   };
 }
 
-export default connect(mapStateToProps)(Content);
+export default withRouter(connect(mapStateToProps)(Content));

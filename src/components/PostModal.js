@@ -3,6 +3,7 @@ import ModalMessage from './ModalMessage';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { firstLetterToUppercase } from '../utils/helper';
+import { hideModal } from '../actions/modal';
 
 class PostModal extends Component {
   state = {
@@ -16,6 +17,20 @@ class PostModal extends Component {
     invalidFields: [],
     message: ''
   };
+
+  cleanInputFields = () => {
+    this.setState({
+      submitted: false,
+      invalidFields: [],
+      message: '',
+      form: {
+        title: '',
+        author: '',
+        body: '',
+        category: 'react'
+      }
+    })
+  }
 
   handleChange = e => {
     const input = e.target.value;
@@ -40,10 +55,6 @@ class PostModal extends Component {
     if(hasInvalidFields) {
       message = 'Please, fill the inputs.';
     }
-    // const { text } = this.state;
-    // const { dispatch, id } = this.props;
-
-    // dispatch(handleAddTweet(text, id));
 
     this.setState(prevState => ({
       form: {
@@ -62,13 +73,17 @@ class PostModal extends Component {
     }));
   }
 
+  hideModal = () => {
+    this.props.dispatch(hideModal());
+  }
+
   render() {
     return (
-      <div className='modal' id='modal'>
+      <div className={`modal ${this.props.modal.show ? 'modal--active' : ''}`} id='modal'>
         <div className='modal__content'>
           <div className='form-message'>
             <h2 className='modal__action'>Add Post</h2>
-            <Link to='/' id='closeButton' className='modal__close-button'>&times;</Link>
+            <button type='button' id='closeButton' className='modal__close-button' onClick={this.hideModal}>&times;</button>
             <form onSubmit={this.handleSubmit}>
               <input
                 type='text'
@@ -142,6 +157,7 @@ class PostModal extends Component {
                 message={this.state.message}
                 form={this.state.form}
                 hideSubmitMessage={this.hideSubmitMessage}
+                cleanInputFields={this.cleanInputFields}
               />
           }
           <div className='clear'></div>
@@ -151,9 +167,10 @@ class PostModal extends Component {
   }
 }
 
-function mapStateToProps({ categories }) {
+function mapStateToProps({ categories, modal }) {
   return {
-    categories: Object.keys(categories).map(index => categories[index].name)
+    categories: Object.keys(categories).map(index => categories[index].name),
+    modal
   }
 }
 

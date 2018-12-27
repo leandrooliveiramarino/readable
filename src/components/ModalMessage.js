@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { handleAddPost } from '../actions/posts';
+import { hideModal } from '../actions/modal';
 
 class ModalMessage extends Component {
 
   handleSubmit = () => {
     const post = this.props.form;
     this.props.dispatch(handleAddPost(post));
-    this.props.history.push('/');
+    this.props.dispatch(hideModal());
+    this.props.cleanInputFields();
   }
 
   render() {
