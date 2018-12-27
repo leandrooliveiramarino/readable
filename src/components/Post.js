@@ -14,7 +14,7 @@ class Post extends Component {
   render() {
     return (
       <div
-        className={`card ${this.props.postMessage.postId === this.props.id && 'card--active'}`}
+        className={`card ${this.props.postMessage.postId === this.props.id ? 'card--active' : ''}`}
         onClick={this.showPostMessage}
       >
         <div className='card__content'>

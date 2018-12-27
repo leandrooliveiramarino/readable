@@ -5,11 +5,12 @@ import Header from './Header';
 import { connect } from 'react-redux';
 
 const Content = (props) => {
+  console.log(props);
   return (
     <div id='content' className='site-content'>
       <Header/>
-      <div id='blog-wrapper'>
-        <div className='blog-holder center-relative'>
+      <div id='blog-wrapper' className={`${!props.postMessage.show ? 'blog-wrapper--100' : ''}`}>
+        <div className={`blog-holder center-relative ${!props.postMessage.show ? 'blog-holder--90' : ''}`}>
           {
             Object.keys(props.posts).map(index => (
               <Post key={props.posts[index].id} {...props.posts[index]} />
@@ -24,9 +25,10 @@ const Content = (props) => {
   );
 }
 
-function mapStateToProps({ posts }) {
+function mapStateToProps({ posts, postMessage }) {
   return {
-    posts
+    posts,
+    postMessage
   };
 }
 

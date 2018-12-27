@@ -1300,6 +1300,7 @@ body.open .site-content {
     padding: 0;
     margin: 0;
     margin-bottom: 20px;
+    height: 40px;
 }
 
 .card .card__content .content__info {
@@ -1309,11 +1310,15 @@ body.open .site-content {
     padding-top: 8px;
     margin: 0;
     display: block;
+    height: 12px;
 }
 
 .card .card__content .card__text {
     font-size: 15px;
-    line-height: 1.4;
+    line-height: 20px;
+    height: 40px;
+    display: flex;
+    width: 100%;
 }
 
 .card .card__score {
@@ -1338,6 +1343,18 @@ body.open .site-content {
 
 .card .card__comments .comments__number {
     margin: 0 10px 0 10px;
+}
+
+/**
+ * Wrapper - where the post elements lives
+ */
+
+.blog-wrapper--100 {
+    width: 100% !important;
+}
+
+.blog-holder--90 {
+    max-width: 90%;
 }
 
 /**
