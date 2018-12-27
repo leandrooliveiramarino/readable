@@ -4,7 +4,7 @@ import PostMessage from './PostMessage';
 import Header from './Header';
 import { connect } from 'react-redux';
 
-const Content = (props) => {
+const Content = props => {
   return (
     <div id='content' className='site-content'>
       <Header/>
