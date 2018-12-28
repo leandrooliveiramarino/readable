@@ -14,13 +14,15 @@ class PostPage extends Component {
 
   render() {
     return (
-      <div className='post-form'>
-        <PostForm
-          post={this.props.posts[this.props.id]}
-          title='Edit'
-          submitButtonLabel='Edit'
-          action={UPDATE_POST}
-        />
+      <div className='featured-image-holder show-post-message'>
+        <div className='post-form'>
+          <PostForm
+            postId={this.props.id}
+            title='Edit'
+            submitButtonLabel='Edit'
+            action={UPDATE_POST}
+          />
+        </div>
       </div>
     )
   }

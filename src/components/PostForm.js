@@ -4,7 +4,6 @@ import { firstLetterToUppercase } from '../utils/helper';
 import PostFormMessage from './PostFormMessage';
 import { hideModal } from '../actions/modal';
 import { withRouter } from 'react-router-dom';
-
 import {
   handleAddPost,
   handleUpdatePost,
@@ -16,23 +15,54 @@ import {
 
 class PostForm extends Component {
 
-  constructor(props) {
-    super();
+  state = {
+    form: {
+      title: '',
+      author: '',
+      body: '',
+      category: 'react'
+    },
+    submitted: false,
+    invalidFields: [],
+    message: '',
+    action: ADD_POST
+  };
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('nextProps ', nextProps);
+  //   console.log('nextState ', nextState);
+  //   return true;
+  // }
+
+  componentDidMount = () => {
     /**
      * Se acaso o objeto "post" não vier preenchido, devemos settar os atributos iniciais corretamente
      */
-    this.state = {
-      form: {
-        title: props.post ? props.post.title : '',
-        author: props.post ? props.post.author : '',
-        body: props.post ? props.post.body : '',
-        category: props.post ? props.post.category : 'react'
-      },
-      submitted: false,
-      invalidFields: [],
-      message: '',
-      action: ADD_POST
-    };
+    if(this.props.post) {
+      this.setState(prevState => ({
+        ...prevState,
+        form: {
+          title: this.props.post.title,
+          author: this.props.post.author,
+          body: this.props.post.body,
+          category: this.props.post.category,
+        }
+      }));
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.match.params.id !== this.props.match.params.id) {
+      this.setState(prevState => ({
+        ...prevState,
+        form: {
+          title: this.props.post.title,
+          author: this.props.post.author,
+          body: this.props.post.body,
+          category: this.props.post.category,
+        }
+      }));
+    }
   }
 
   cleanInputFields = () => {
@@ -216,9 +246,10 @@ class PostForm extends Component {
   }
 }
 
-function mapStateToProps({ categories }, post) {
+function mapStateToProps({ categories, posts }, { postId }) {
   return {
-    categories: Object.keys(categories).map(index => categories[index].name)
+    categories: Object.keys(categories).map(index => categories[index].name),
+    post: posts[postId]
   };
 }
 

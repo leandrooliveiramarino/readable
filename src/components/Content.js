@@ -1,33 +1,50 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PostMessage from './PostMessage';
 import PostList from './PostList';
+import ResponseList from './ResponseList';
 import PostPage from './PostPage';
 import Header from './Header';
 import { connect } from 'react-redux';
 import { withRouter, Route } from 'react-router-dom';
 
-const Content = props => {
-  return (
-    <div id='content' className='site-content'>
-      <Header/>
-      <div id='blog-wrapper' className={`${!props.postMessage.show ? 'blog-wrapper--100' : ''}`}>
+class Content extends Component {
+  render() {
+    return (
+      <div id='content' className='site-content'>
+        <Header/>
+        <Route
+          path='/:category/:id'
+          component={ResponseList}
+        />
         <Route path='/:category/:id' component={PostPage} />
+
         {
-          Object.keys(props.categories).map(index =>
+          Object.keys(this.props.categories).map(index =>
             <Route
-              key={`${props.categories[index].path}`}
-              path={`/${props.categories[index].path}`}
-              render={() => <PostList category={props.categories[index].name}/>}
+              exact
+              key={`${this.props.categories[index].path}`}
+              path={`/${this.props.categories[index].path}`}
+              render={() => <PostList category={this.props.categories[index].name}/>}
             />
           )
         }
         <Route exact path='/' render={() => <PostList category={null}/>} />
+
+        <Route exact path='/' component={PostMessage} />
+        {
+          Object.keys(this.props.categories).map(index =>
+            <Route
+              exact
+              key={`${this.props.categories[index].path}`}
+              path={`/${this.props.categories[index].path}`}
+              component={PostMessage}
+            />
+          )
+        }
         <div className='clear'></div>
       </div>
-      <PostMessage/>
-      <div className='clear'></div>
-    </div>
-  );
+    );
+  }
 }
 
 function mapStateToProps({ categories, postMessage }) {

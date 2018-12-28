@@ -1542,8 +1542,7 @@ body.open .site-content {
  * PostForm
  */
 .post-form {
-    margin: 150px 0 0 50px;
-    width: 30%;
+    margin: 150px 50px 0 50px;
 }
 
 .post-form__action {

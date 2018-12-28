@@ -15,10 +15,17 @@ class Post extends Component {
      * Ao clicar nos elementos discriminados na constante "exceptParents", o evento de exibir a mensagem não será despachado
      */
     const exceptParents = ['.card__score', '.card__comments'];
-    const willShowPostMessage = !exceptParents.filter(element => clickedElement.closest(element)).length;
+    const proceedIntent = !exceptParents.filter(element => clickedElement.closest(element)).length;
 
-    if(willShowPostMessage) {
+    if(proceedIntent && !this.props.redirectWhenClicked) {
       this.props.dispatch(showPostMessage(this.props));
+    }
+
+    /**
+     * Na página de edição/visualização do comentário do usuário, é passada a propriedade "redirectWhenClicked", prevenindo ou permitindo a abertura da modal lateral de visualização do corpo do comentário e redirecionando (ou não) o usuário para a respectiva página do comentário.
+     */
+    if(proceedIntent && this.props.redirectWhenClicked) {
+      this.props.history.push(`/${this.props.category}/${this.props.id}`);
     }
   }
 
