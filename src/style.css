@@ -1339,6 +1339,7 @@ body.open .site-content {
 .card .card__comments {
     margin: 20px 0 0 0;
     float: right;
+    cursor: pointer;
 }
 
 .card .card__comments .comments__number {

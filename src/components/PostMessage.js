@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 
 class PostMessage extends Component {
 
-  toPage = (id) => {
-    this.props.history.push(`/post/${id}`);
+  toPage = id => {
+    this.props.history.push(`/${this.props.posts[id].category}/${id}`);
   }
 
   render() {
@@ -27,9 +27,10 @@ class PostMessage extends Component {
   }
 }
 
-function mapStateToProps({ postMessage }) {
+function mapStateToProps({ postMessage, posts }) {
   return {
-    postMessage
+    postMessage,
+    posts
   };
 }
 

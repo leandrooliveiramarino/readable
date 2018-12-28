@@ -32,6 +32,7 @@ class Header extends Component {
         {
           Object.keys(this.props.categories).map(index =>
             <Route
+              exact
               key={`${this.props.categories[index].path}`}
               path={`/${this.props.categories[index].path}`}
               component={Options}

@@ -11,7 +11,7 @@ const Content = props => {
     <div id='content' className='site-content'>
       <Header/>
       <div id='blog-wrapper' className={`${!props.postMessage.show ? 'blog-wrapper--100' : ''}`}>
-        <Route path='/post/:id' component={PostPage} />
+        <Route path='/:category/:id' component={PostPage} />
         {
           Object.keys(props.categories).map(index =>
             <Route
