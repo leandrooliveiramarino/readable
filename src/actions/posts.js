@@ -67,10 +67,10 @@ export function handleAddPost(post) {
   }
 }
 
-export function handleUpdatePost(post) {
+export function handleUpdatePost(post, postId) {
   return (dispatch, getState) => {
     dispatch(showLoading());
-    return updatePost(post)
+    return updatePost(post, postId)
     .then(post => {
       dispatch(_updatePost(post))
     })

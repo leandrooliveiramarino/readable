@@ -74,7 +74,7 @@ class PostForm extends Component {
         this.cleanInputFields();
         break;
       case UPDATE_POST:
-        this.props.dispatch(handleUpdatePost(post));
+        this.props.dispatch(handleUpdatePost(post, this.props.post.id));
         this.props.history.push('/');
         break;
       case REMOVE_POST:
