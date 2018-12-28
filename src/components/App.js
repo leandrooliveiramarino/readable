@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared';
 import LoadingBar from 'react-redux-loading';
@@ -18,13 +18,36 @@ class App extends Component {
       <Router>
         <Fragment>
           <LoadingBar/>
-          <Sidebar/>
-          <Content/>
-          <PostModal/>
+          {
+            this.props.loading
+              ? null
+              :
+              <div>
+                <Sidebar/>
+                <Content/>
+                <Route exact path='/' component={PostModal}/>
+                {
+                  Object.keys(this.props.categories).map(index =>
+                    <Route
+                      key={`${this.props.categories[index].path}`}
+                      path={`/${this.props.categories[index].path}`}
+                      component={PostModal}
+                    />
+                  )
+                }
+              </div>
+          }
         </Fragment>
       </Router>
     );
   }
 }
 
-export default connect()(App);
+function mapStateToProps({ authedUser, categories }) {
+  return {
+    loading: authedUser === null,
+    categories
+  };
+}
+
+export default connect(mapStateToProps)(App);

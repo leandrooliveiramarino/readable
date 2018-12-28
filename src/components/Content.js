@@ -1,6 +1,7 @@
 import React from 'react';
 import PostMessage from './PostMessage';
 import PostList from './PostList';
+import PostPage from './PostPage';
 import Header from './Header';
 import { connect } from 'react-redux';
 import { withRouter, Route } from 'react-router-dom';
@@ -10,6 +11,7 @@ const Content = props => {
     <div id='content' className='site-content'>
       <Header/>
       <div id='blog-wrapper' className={`${!props.postMessage.show ? 'blog-wrapper--100' : ''}`}>
+        <Route path='/post/:id' component={PostPage} />
         {
           Object.keys(props.categories).map(index =>
             <Route

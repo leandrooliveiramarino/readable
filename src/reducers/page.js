@@ -5,7 +5,8 @@ export default function posts(state = {}, action) {
     case PAGE_NAME:
       return {
         ...state,
-        name: action.name
+        name: action.name,
+        subtitle: action.subtitle
       }
     default:
       return state;

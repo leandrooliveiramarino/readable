@@ -1,4 +1,4 @@
-import { GET_POSTS, ADD_POST, UP_VOTE, DOWN_VOTE } from '../actions/posts';
+import { GET_POSTS, REMOVE_POST, UPDATE_POST, ADD_POST, UP_VOTE, DOWN_VOTE } from '../actions/posts';
 
 export default function posts(state = {}, action) {
   switch(action.type) {
@@ -11,6 +11,42 @@ export default function posts(state = {}, action) {
       return {
         ...state,
         [action.post.id]: action.post
+      }
+    case REMOVE_POST:
+      return {
+        ...Object.keys(state).reduce((carry, index) => {
+
+          if(!carry && index !== action.postId) {
+            return {
+              [index]: state[index]
+            };
+          }
+
+          if(!carry && index === action.postId) {
+            return {};
+          }
+
+          if(!carry) {
+            return {
+              [index]: state[index]
+            };
+          }
+
+          if(index === action.postId) {
+            return carry;
+          }
+
+          carry[index] = state[index];
+
+          return carry;
+        }, null)
+      }
+    case UPDATE_POST:
+      return {
+        ...state,
+        [action.post.id]: {
+          ...action.post
+        }
       }
     case UP_VOTE:
       return {

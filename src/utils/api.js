@@ -64,6 +64,32 @@ export const savePost = post =>
   .then(res => res.json())
   .then(data => data);
 
+export const removePost = postId =>
+  fetch(`${api}/posts/${postId}`, {
+    method: 'DELETE',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(res => res.json())
+  .then(data => data);
+
+export const updatePost = (post, postId) =>
+  fetch(`${api}/posts/${postId}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      body: post.body,
+      title: post.title
+    })
+  })
+  .then(res => res.json())
+  .then(data => data);
+
 export const updateVote = (postId, option) =>
   fetch(`${api}/posts/${postId}`, {
     method: 'POST',

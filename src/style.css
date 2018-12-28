@@ -1400,6 +1400,11 @@ body.open .site-content {
     color: #00695f;
 }
 
+.header__site-subtitle {
+    color: #00695f;
+    font-size: 25px;
+}
+
 /**
  * Modal
  */
@@ -1440,6 +1445,7 @@ body.open .site-content {
     font-size: 30px;
     background-color: #FFF;
     border: 0;
+    margin: 20px;
 }
 
 .modal__content .modal__close-button:hover,
@@ -1447,16 +1453,6 @@ body.open .site-content {
     color: #000;
     text-decoration: none;
     cursor: pointer;
-}
-
-.modal__action {
-    float: left;
-    font-family: 'Montserrat', sans-serif, Arial;
-    color: #00695f;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 25px;
-    text-transform: uppercase;
 }
 
 .modal__remove {
@@ -1542,6 +1538,23 @@ body.open .site-content {
 }
 
 /**
+ * PostForm
+ */
+.post-form {
+    margin: 150px 0 0 50px;
+    width: 30%;
+}
+
+.post-form__action {
+    float: left;
+    font-family: 'Montserrat', sans-serif, Arial;
+    color: #00695f;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 25px;
+    text-transform: uppercase;
+}
+/**
  * General
  */
 
@@ -1586,7 +1599,19 @@ body.open .site-content {
     font-family: 'Montserrat', sans-serif, Arial;
 }
 
-.form-message__submit:hover {
+.form-message__delete {
+    float: left;
+    height: 40px;
+    width: 150px;
+    border: 2px solid;
+    background-color: #FFF;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif, Arial;
+}
+
+.form-message__submit:hover,
+.form-message__delete:hover {
     border-color: #00695f;
     color: #FFF;
     background-color: #00695f;

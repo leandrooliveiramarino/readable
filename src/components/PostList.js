@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Post from './Post';
 import { connect } from 'react-redux';
-import { setPageName } from '../actions/page';
+import { setPageTitle } from '../actions/page';
 
 class PostList extends Component {
 
   componentDidMount = () => {
-    this.props.dispatch(setPageName(this.props.category));
+    this.props.dispatch(setPageTitle(this.props.category));
   }
 
   render() {

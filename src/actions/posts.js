@@ -1,9 +1,11 @@
 import { generateUID } from '../utils/helper';
-import { savePost, updateVote } from '../utils/api';
+import { savePost, updatePost, removePost, updateVote } from '../utils/api';
 import { showLoading, hideLoading } from 'react-redux-loading';
 
 export const GET_POSTS = 'GET_POSTS';
 export const ADD_POST = 'ADD_POST';
+export const UPDATE_POST = 'UPDATE_POST';
+export const REMOVE_POST = 'REMOVE_POST';
 export const UP_VOTE = 'UP_VOTE';
 export const DOWN_VOTE = 'DOWN_VOTE';
 
@@ -14,10 +16,24 @@ export function getPosts(posts) {
   }
 }
 
-function addPost(post) {
+function _savePost(post) {
   return {
     type: ADD_POST,
     post
+  };
+}
+
+function _updatePost(post) {
+  return {
+    type: UPDATE_POST,
+    post
+  };
+}
+
+function _removePost(postId) {
+  return {
+    type: REMOVE_POST,
+    postId
   };
 }
 
@@ -43,11 +59,31 @@ export function handleAddPost(post) {
 
   return (dispatch, getState) => {
     dispatch(showLoading());
-    return savePost({
-      ...post
-    })
+    return savePost(post)
     .then(post => {
-      dispatch(addPost(post))
+      dispatch(_savePost(post))
+    })
+    .then(() => dispatch(hideLoading()));
+  }
+}
+
+export function handleUpdatePost(post) {
+  return (dispatch, getState) => {
+    dispatch(showLoading());
+    return updatePost(post)
+    .then(post => {
+      dispatch(_updatePost(post))
+    })
+    .then(() => dispatch(hideLoading()));
+  }
+}
+
+export function handleRemovePost(postId) {
+  return (dispatch, getState) => {
+    dispatch(showLoading());
+    return removePost(postId)
+    .then(post => {
+      dispatch(_removePost(postId))
     })
     .then(() => dispatch(hideLoading()));
   }
