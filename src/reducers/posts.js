@@ -14,6 +14,9 @@ export default function posts(state = {}, action) {
       }
     case REMOVE_POST:
       return {
+        /**
+         * Lógica para remover o atributo do objeto "post"
+         */
         ...Object.keys(state).reduce((carry, index) => {
 
           if(!carry && index !== action.postId) {

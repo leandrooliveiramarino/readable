@@ -81,6 +81,9 @@ class PostForm extends Component {
         this.props.dispatch(handleRemovePost(this.props.post.id));
         this.props.history.push('/');
         break;
+      default:
+        this.props.history.push('/');
+        return;
     }
   }
 
@@ -151,6 +154,7 @@ class PostForm extends Component {
                 placeholder='Author'
                 value={this.state.form.author}
                 onChange={this.handleChange}
+                disabled={this.props.action === UPDATE_POST}
               />
               <textarea
                 name='body'
@@ -179,6 +183,7 @@ class PostForm extends Component {
                 name='category'
                 onChange={this.handleChange}
                 value={this.state.form.category}
+                disabled={this.props.action === UPDATE_POST}
               >
               {
                 this.props.categories.map(category =>
@@ -191,7 +196,9 @@ class PostForm extends Component {
               }
               </select>
               <button className='form-message__submit'>{this.props.submitButtonLabel}</button>
-              <button type='button' className='form-message__delete' onClick={this.confirmDeletion}>Delete</button>
+              {
+                this.props.action === UPDATE_POST && <button type='button' className='form-message__delete' onClick={this.confirmDeletion}>Delete</button>
+              }
             </form>
           </div>
           {
