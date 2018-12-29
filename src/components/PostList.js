@@ -3,8 +3,15 @@ import Post from './Post';
 import { connect } from 'react-redux';
 import { setPageTitle } from '../actions/page';
 import { formatListToObject } from '../utils/helper';
+import PropTypes from 'prop-types';
 
 class PostList extends Component {
+
+  static propTypes = {
+    postMessage: PropTypes.object.isRequired,
+    category: PropTypes.string,
+    posts: PropTypes.object.isRequired,
+  }
 
   componentDidMount = () => {
     this.props.dispatch(setPageTitle(this.props.category));

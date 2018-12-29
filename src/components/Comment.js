@@ -11,8 +11,19 @@ import {
   UPDATE_COMMENT,
   REMOVE_COMMENT
 } from '../actions/comments';
+import PropTypes from 'prop-types';
 
 class Comment extends Component {
+
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    parentId: PropTypes.string.isRequired,
+    body: PropTypes.string.isRequired,
+    history: PropTypes.object.isRequired,
+    author: PropTypes.string.isRequired,
+    timestamp: PropTypes.number.isRequired,
+    voteScore: PropTypes.number.isRequired
+  }
 
   state = {
     action: null,

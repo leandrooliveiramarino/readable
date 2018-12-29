@@ -3,8 +3,13 @@ import { connect } from 'react-redux';
 import PostForm from './PostForm';
 import { hideModal } from '../actions/modal';
 import { ADD_POST } from '../actions/posts';
+import PropTypes from 'prop-types';
 
 class PostModal extends Component {
+
+  static propTypes = {
+    modal: PropTypes.object.isRequired
+  }
 
   hideModal = e => {
     const clickedElement = e.target;

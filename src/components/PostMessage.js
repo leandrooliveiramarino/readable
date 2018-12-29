@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class PostMessage extends Component {
+
+  static propTypes = {
+    history: PropTypes.object.isRequired,
+    posts: PropTypes.object.isRequired,
+    postMessage: PropTypes.object.isRequired
+  }
 
   toPage = id => {
     this.props.history.push(`/${this.props.posts[id].category}/${id}`);

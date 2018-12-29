@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setPageTitle } from '../actions/page';
+import PropTypes from 'prop-types';
 
 class NotFound extends Component {
+
+  static propTypes = {
+    history: PropTypes.object.isRequired
+  }
+
   state = {
     timeToRedirect: null
   }

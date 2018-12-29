@@ -2,8 +2,15 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Options from './Options';
 import { Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class Header extends Component {
+
+  static propTypes = {
+    page: PropTypes.object.isRequired,
+    postMessage: PropTypes.object.isRequired,
+    categories: PropTypes.object.isRequired
+  }
 
   showSiteName = () => (
     <Fragment>

@@ -6,8 +6,13 @@ import LoadingBar from 'react-redux-loading';
 import Sidebar from './Sidebar';
 import Content from './Content';
 import PostModal from './PostModal';
+import PropTypes from 'prop-types';
 
 class App extends Component {
+
+  static propTypes = {
+    loading: PropTypes.bool.isRequired
+  }
 
   componentDidMount() {
     this.props.dispatch(handleInitialData());

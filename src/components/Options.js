@@ -3,8 +3,13 @@ import { showModal } from '../actions/modal';
 import { changeSortByOptions } from '../actions/sort';
 import { connect } from 'react-redux';
 import { ADD_POST } from '../actions/posts';
+import PropTypes from 'prop-types';
 
 class Options extends Component {
+
+  static propTypes = {
+    sort: PropTypes.object.isRequired
+  }
 
   state = {
     field: 'timestamp',

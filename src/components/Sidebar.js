@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Route } from 'react-router-dom';
 import DevelopedBy from './DevelopedBy';
+import PropTypes from 'prop-types';
 
-const Sidebar = (props) => {
+const Sidebar = props => {
     return (
       <div id='sidebar' className='sidebar'>
         <div className='menu-right-part'>
@@ -45,6 +46,10 @@ const Sidebar = (props) => {
         <div className='clear'></div>
       </div>
     );
+}
+
+Sidebar.propTypes = {
+  categories: PropTypes.object.isRequired
 }
 
 function mapStateToProps(categories) {

@@ -7,8 +7,14 @@ import NotFound from './NotFound';
 import Header from './Header';
 import { connect } from 'react-redux';
 import { withRouter, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class Content extends Component {
+
+  static propTypes = {
+    categories: PropTypes.object.isRequired
+  }
+
   render() {
     return (
       <div id='content' className='site-content'>

@@ -3,8 +3,16 @@ import Comment from './Comment';
 import { connect } from 'react-redux';
 import { setPageTitle } from '../actions/page';
 import { fetchComments } from '../actions/shared';
+import PropTypes from 'prop-types';
 
 class ResponseList extends Component {
+
+  static propTypes = {
+    match: PropTypes.object.isRequired,
+    category: PropTypes.object,
+    filteredComments: PropTypes.array.isRequired,
+    comments: PropTypes.object.isRequired
+  }
 
   componentDidMount = () => {
     this.props.dispatch(fetchComments(this.props.match.params.id));

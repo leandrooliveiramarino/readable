@@ -4,8 +4,15 @@ import { setPageTitle } from '../actions/page';
 import PostForm from './PostForm';
 import { hidePostMessage } from '../actions/postMessage';
 import { UPDATE_POST } from '../actions/posts';
+import PropTypes from 'prop-types';
 
 class PostPage extends Component {
+
+  static propTypes = {
+    post: PropTypes.object,
+    history: PropTypes.object.isRequired,
+    id: PropTypes.string.isRequired
+  }
 
   componentDidMount = () => {
     /**

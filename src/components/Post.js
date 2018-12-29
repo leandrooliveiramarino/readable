@@ -5,8 +5,23 @@ import { handleUpVote, handleDownVote } from '../actions/posts';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { formatDate } from '../utils/helper';
+import PropTypes from 'prop-types';
 
 class Post extends Component {
+
+  static propTypes = {
+    redirectWhenClicked: PropTypes.bool,
+    history: PropTypes.object.isRequired,
+    category: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    postMessage: PropTypes.object.isRequired,
+    title: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    timestamp: PropTypes.number.isRequired,
+    body: PropTypes.string.isRequired,
+    voteScore: PropTypes.number.isRequired,
+    commentCount: PropTypes.number.isRequired
+  }
 
   showPostMessage = e => {
     const clickedElement = e.target;

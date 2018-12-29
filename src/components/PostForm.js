@@ -17,8 +17,21 @@ import {
   handleAddComment,
   ADD_COMMENT
 } from '../actions/comments';
+import PropTypes from 'prop-types';
 
 class PostForm extends Component {
+
+  static propTypes = {
+    post: PropTypes.object,
+    match: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
+    action: PropTypes.string.isRequired,
+    modal: PropTypes.object.isRequired,
+    postId: PropTypes.string,
+    title: PropTypes.string,
+    categories: PropTypes.array.isRequired,
+    submitButtonLabel: PropTypes.string
+  }
 
   state = {
     form: {
@@ -278,6 +291,7 @@ class PostForm extends Component {
                 message={this.state.message}
                 hideSubmitMessage={this.hideSubmitMessage}
                 handleSubmit={this.handleSubmit}
+                action={this.state.action}
               />
           }
           <div className='clear'></div>
