@@ -1620,6 +1620,41 @@ body.open .site-content {
     font-family: 'Montserrat', sans-serif, Arial;
     text-align: center;
 }
+
+/**
+ * Developed By
+ */
+.developed-by {
+    font-family: 'Montserrat', sans-serif, Arial;
+    position: absolute;
+    bottom: 0;
+}
+
+.developed-by__text {
+    color: #FFF;
+    font-size: 12px;
+    text-align: center;
+    line-height: 15px;
+}
+
+.social-medias {
+    margin: 20px 0 0 0;
+}
+
+.social-medias__icon {
+    display: block;
+    margin: auto;
+    text-align: center;
+    transition: opacity 1s;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+.social-medias__icon:hover {
+    transition: opacity 1s;
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
 /**
  * General
  */

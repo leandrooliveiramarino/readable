@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Route } from 'react-router-dom';
+import DevelopedBy from './DevelopedBy';
 
 const Sidebar = (props) => {
     return (
@@ -36,6 +37,7 @@ const Sidebar = (props) => {
             }
             </div>
           </div>
+          <DevelopedBy/>
           <div className='fixed scroll-top'>
             <i className='fa fa-caret-square-o-up' aria-hidden='true'></i>
           </div>
