@@ -1,5 +1,5 @@
 import { generateUID } from '../utils/helper';
-import { saveComment, updateComment, replyComment, removeComment, updateCommentVote } from '../utils/api';
+import { saveComment, updateComment, removeComment, updateCommentVote } from '../utils/api';
 import { showLoading, hideLoading } from 'react-redux-loading';
 
 export const GET_COMMENTS = 'GET_COMMENTS';

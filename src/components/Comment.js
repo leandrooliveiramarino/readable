@@ -1,10 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { limitCharacters } from '../utils/helper.js';
-import { showPostMessage } from '../actions/postMessage';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { formatDate } from '../utils/helper';
-import { showModal } from '../actions/modal';
 import {
   handleUpVote,
   handleDownVote,

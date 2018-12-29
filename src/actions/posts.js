@@ -1,5 +1,5 @@
 import { generateUID } from '../utils/helper';
-import { savePost, updatePost, replyPost, removePost, updatePostVote } from '../utils/api';
+import { savePost, updatePost, removePost, updatePostVote } from '../utils/api';
 import { showLoading, hideLoading } from 'react-redux-loading';
 
 export const GET_POSTS = 'GET_POSTS';
