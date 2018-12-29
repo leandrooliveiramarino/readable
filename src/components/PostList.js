@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Post from './Post';
 import { connect } from 'react-redux';
 import { setPageTitle } from '../actions/page';
+import { formatListToObject } from '../utils/helper';
 
 class PostList extends Component {
 
@@ -38,10 +39,37 @@ class PostList extends Component {
   }
 }
 
-function mapStateToProps({ posts, postMessage }) {
+function mapStateToProps({ posts, postMessage, sort }) {
+  const postList = Object.keys(posts).map(index => {
+    return posts[index];
+  });
+
+  /**
+   * Aplicando ordenação aos elementos
+   */
+  const orderedPosts = postList.sort((a, b) => {
+
+    if(a[sort.field] === undefined || b[sort.field] === undefined) {
+      return 0;
+    }
+
+    const aField = a[sort.field].toString().toLowerCase();
+    const bField = b[sort.field].toString().toLowerCase();
+
+    if(aField > bField) {
+      return 1 * Number(sort.ordination);
+    }
+
+    if(aField < bField) {
+      return -1 * Number(sort.ordination);
+    }
+    return 0;
+  });
+
   return {
-    posts,
-    postMessage
+    posts: formatListToObject(orderedPosts),
+    postMessage,
+    sort
   };
 }
 

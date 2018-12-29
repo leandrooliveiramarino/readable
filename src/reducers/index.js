@@ -6,6 +6,7 @@ import comments from './comments';
 import postMessage from './postMessage';
 import page from './page';
 import modal from './modal';
+import sort from './sort';
 import { loadingBarReducer } from 'react-redux-loading';
 
 export default combineReducers({
@@ -16,5 +17,6 @@ export default combineReducers({
     postMessage,
     page,
     modal,
+    sort,
     loadingBar: loadingBarReducer
 });

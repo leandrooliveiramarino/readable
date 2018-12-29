@@ -14,3 +14,15 @@ export const generateUID = () => {
 }
 
 export const firstLetterToUppercase = text => text.charAt(0).toUpperCase() + text.slice(1);
+
+export const formatListToObject = list => list.reduce(
+  (carry, element) => {
+    if(!carry) {
+      return {
+        [element.id]: element
+      }
+    }
+    carry[element.id] = element;
+    return carry;
+  },
+null)

@@ -1,3 +1,5 @@
+import { formatListToObject } from './helper';
+
 const api = "http://localhost:3001"
 
 // Generate a unique token for storing your bookshelf data on the backend server.
@@ -42,15 +44,7 @@ const getPosts = () =>
     }
   })
   .then(res => res.json())
-  .then(data => data.reduce((carry, post) => {
-      if(!carry) {
-        return {
-          [post.id]: post
-        }
-      }
-      carry[post.id] = post;
-      return carry;
-    }, null));
+  .then(data => formatListToObject(data));
 
 export const savePost = post =>
   fetch(`${api}/posts`, {
