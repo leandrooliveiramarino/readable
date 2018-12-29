@@ -5,7 +5,11 @@ export default function modal (state = {}, action) {
     case SHOW_MODAL:
       return {
         ...state,
-        show: true
+        show: true,
+        action: action.action,
+        title: action.title,
+        submitButtonLabel: action.submitButtonLabel,
+        parentId: action.parentId,
       };
     case HIDE_MODAL:
       return {

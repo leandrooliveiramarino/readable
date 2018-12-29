@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { showModal } from '../actions/modal';
 import { connect } from 'react-redux';
+import { ADD_POST } from '../actions/posts';
 
 class Options extends Component {
 
   showModal = () => {
-    this.props.dispatch(showModal());
+    this.props.dispatch(showModal({
+      action: ADD_POST,
+      title: 'Add Post',
+      submitButtonLabel: 'Add'
+    }));
   }
 
   render() {

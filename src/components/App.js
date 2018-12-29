@@ -25,17 +25,7 @@ class App extends Component {
               <div>
                 <Sidebar/>
                 <Content/>
-                <Route exact path='/' component={PostModal}/>
-                {
-                  Object.keys(this.props.categories).map(index =>
-                    <Route
-                      exact
-                      key={`${this.props.categories[index].path}`}
-                      path={`/${this.props.categories[index].path}`}
-                      component={PostModal}
-                    />
-                  )
-                }
+                <PostModal/>
               </div>
           }
         </Fragment>

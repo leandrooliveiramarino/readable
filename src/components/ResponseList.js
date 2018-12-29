@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import Post from './Post';
+import Comment from './Comment';
 import { connect } from 'react-redux';
 import { setPageTitle } from '../actions/page';
+import { fetchComments } from '../actions/shared';
 
 class ResponseList extends Component {
 
   componentDidMount = () => {
+    this.props.dispatch(fetchComments(this.props.match.params.id));
     this.props.dispatch(setPageTitle(this.props.category));
   }
 
@@ -14,8 +16,8 @@ class ResponseList extends Component {
       <div id='blog-wrapper'>
         <div className={`blog-holder center-relative`}>
           {
-            Object.keys(this.props.posts).map(index => (
-              <Post key={this.props.posts[index].id} {...this.props.posts[index]} redirectWhenClicked={true} />
+            this.props.filteredComments.map(index => (
+              <Comment key={index} {...this.props.comments[index]} />
             ))
           }
         </div>
@@ -25,9 +27,11 @@ class ResponseList extends Component {
   }
 }
 
-function mapStateToProps({ posts, postMessage }) {
+function mapStateToProps({ postMessage, comments }, props) {
+  const filteredComments = Object.keys(comments).filter(index => comments[index].parentId === props.match.params.id);
   return {
-    posts,
+    comments,
+    filteredComments,
     postMessage
   };
 }

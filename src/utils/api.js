@@ -90,7 +90,22 @@ export const updatePost = (post, postId) =>
   .then(res => res.json())
   .then(data => data);
 
-export const updateVote = (postId, option) =>
+export const replyPost = (post, parentId) =>
+  fetch(`${api}/posts/${parentId}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      body: post.body,
+      title: post.title
+    })
+  })
+  .then(res => res.json())
+  .then(data => data);
+
+export const updatePostVote = (postId, option) =>
   fetch(`${api}/posts/${postId}`, {
     method: 'POST',
     headers: {
@@ -103,3 +118,88 @@ export const updateVote = (postId, option) =>
   })
   .then(res => res.json())
   .then(data => data);
+
+export const getCommentsApi = postId =>
+  fetch(`${api}/posts/${postId}/comments`, {
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(res => res.json())
+  .then(data => data.reduce((carry, comment) => {
+      if(!carry) {
+        return {
+          [comment.id]: comment
+        }
+      }
+      carry[comment.id] = comment;
+      return carry;
+    }, null));
+
+export const saveComment = comment =>
+  fetch(`${api}/comments`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(comment)
+  })
+  .then(res => res.json())
+  .then(data => data);
+
+// export const removeComment = commentId =>
+//   fetch(`${api}/comments/${commentId}`, {
+//     method: 'DELETE',
+//     headers: {
+//       ...headers,
+//       'Content-Type': 'application/json'
+//     }
+//   })
+//   .then(res => res.json())
+//   .then(data => data);
+
+// export const updateComment = (comment, commentId) =>
+//   fetch(`${api}/comments/${commentId}`, {
+//     method: 'PUT',
+//     headers: {
+//       ...headers,
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({
+//       body: comment.body,
+//       title: comment.title
+//     })
+//   })
+//   .then(res => res.json())
+//   .then(data => data);
+
+// export const replyComment = (comment, parentId) =>
+//   fetch(`${api}/comments/${parentId}`, {
+//     method: 'PUT',
+//     headers: {
+//       ...headers,
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({
+//       body: comment.body,
+//       title: comment.title
+//     })
+//   })
+//   .then(res => res.json())
+//   .then(data => data);
+
+// export const updateCommentVote = (commentId, option) =>
+//   fetch(`${api}/comments/${commentId}`, {
+//     method: 'POST',
+//     headers: {
+//       ...headers,
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({
+//       option
+//     })
+//   })
+//   .then(res => res.json())
+//   .then(data => data);

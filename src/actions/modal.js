@@ -1,9 +1,13 @@
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 
-export function showModal() {
+export function showModal({action, submitButtonLabel, title, parentId}) {
   return {
-    type: SHOW_MODAL
+    type: SHOW_MODAL,
+    action,
+    submitButtonLabel,
+    title,
+    parentId
   }
 };
 

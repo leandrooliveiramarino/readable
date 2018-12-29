@@ -1,6 +1,7 @@
-import { getInitialData } from '../utils/api';
+import { getInitialData, getCommentsApi } from '../utils/api';
 import { getCategories } from '../actions/categories';
 import { getPosts } from '../actions/posts';
+import { getComments } from '../actions/comments';
 import { setAuthedUser } from '../actions/authedUser';
 import { showLoading, hideLoading } from 'react-redux-loading';
 
@@ -16,5 +17,16 @@ export function handleInitialData() {
         dispatch(hideLoading());
         dispatch(setAuthedUser(AUTHED_ID));
       });
+  }
+}
+
+export function fetchComments(postId) {
+  return dispatch => {
+    dispatch(showLoading());
+    return getCommentsApi(postId)
+      .then(comments => {
+        dispatch(getComments(comments))
+        dispatch(hideLoading());
+      })
   }
 }

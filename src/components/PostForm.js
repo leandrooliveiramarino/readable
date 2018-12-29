@@ -4,6 +4,7 @@ import { firstLetterToUppercase } from '../utils/helper';
 import PostFormMessage from './PostFormMessage';
 import { hideModal } from '../actions/modal';
 import { withRouter } from 'react-router-dom';
+import { showModal } from '../actions/modal';
 import {
   handleAddPost,
   handleUpdatePost,
@@ -12,6 +13,10 @@ import {
   UPDATE_POST,
   REMOVE_POST
 } from '../actions/posts';
+import {
+  handleAddComment,
+  ADD_COMMENT
+} from '../actions/comments';
 
 class PostForm extends Component {
 
@@ -25,14 +30,9 @@ class PostForm extends Component {
     submitted: false,
     invalidFields: [],
     message: '',
-    action: ADD_POST
+    action: ADD_POST,
+    answerPostId: null
   };
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log('nextProps ', nextProps);
-  //   console.log('nextState ', nextState);
-  //   return true;
-  // }
 
   componentDidMount = () => {
     /**
@@ -71,6 +71,7 @@ class PostForm extends Component {
       invalidFields: [],
       message: '',
       action: ADD_POST,
+      answerPostId: null,
       form: {
         title: '',
         author: '',
@@ -95,21 +96,25 @@ class PostForm extends Component {
 
 
   handleSubmit = () => {
-    const post = this.state.form;
+    const form = this.state.form;
 
     switch(this.state.action) {
       case ADD_POST:
-        this.props.dispatch(handleAddPost(post));
+        this.props.dispatch(handleAddPost(form));
         this.props.dispatch(hideModal());
         this.cleanInputFields();
         break;
       case UPDATE_POST:
-        this.props.dispatch(handleUpdatePost(post, this.props.post.id));
+        this.props.dispatch(handleUpdatePost(form, this.props.post.id));
         this.props.history.push('/');
         break;
       case REMOVE_POST:
         this.props.dispatch(handleRemovePost(this.props.post.id));
         this.props.history.push('/');
+        break;
+      case ADD_COMMENT:
+        this.props.dispatch(handleAddComment(form, this.state.answerPostId));
+        this.props.dispatch(hideModal());
         break;
       default:
         this.props.history.push('/');
@@ -120,7 +125,16 @@ class PostForm extends Component {
   validateForm = e => {
     e.preventDefault();
 
-    const invalidFields = Object.keys(this.state.form).filter(index => this.state.form[index] === '');
+    let formKeys = Object.keys(this.state.form);
+
+    /**
+     * No caso de respostas aos comentários, deve-se desconsiderar o campo "category"
+     */
+    if(this.props.action === ADD_COMMENT) {
+      delete formKeys['category'];
+    }
+
+    const invalidFields = formKeys.filter(index => this.state.form[index] === '');
     const hasInvalidFields = invalidFields.length;
     let message = 'Do you really want to proceed?';
 
@@ -135,7 +149,8 @@ class PostForm extends Component {
       submitted: true,
       invalidFields,
       message,
-      action: this.props.action
+      action: this.props.action,
+      answerPostId: this.props.modal.parentId
     }));
   }
 
@@ -155,11 +170,29 @@ class PostForm extends Component {
     }));
   }
 
+  showModal = () => {
+    this.props.dispatch(showModal({
+      action: ADD_COMMENT,
+      title: 'Answer',
+      submitButtonLabel: 'Reply',
+      parentId: this.props.postId
+    }));
+  }
+
   render() {
     return (
         <Fragment>
           <div className='form-message'>
             <h2 className='post-form__action'>{this.props.title}</h2>
+            {
+              this.props.action === UPDATE_POST &&
+                <button
+                  className='post-form__reply'
+                  type='button'
+                  onClick={this.showModal}
+                >Click to Reply
+                </button>
+            }
             <form onSubmit={this.validateForm}>
               <input
                 type='text'
@@ -198,33 +231,39 @@ class PostForm extends Component {
                 onChange={this.handleChange}
               >
               </textarea>
-              <label
-                htmlFor='category'
-                className='label-name'
-              >
-                Category
-              </label>
-              <select
-                className={`form-select ${this.state.invalidFields.indexOf('category') > -1 &&
-                  this.state.submitted &&
-                  'form-control--danger'}`
-                }
-                id='category'
-                name='category'
-                onChange={this.handleChange}
-                value={this.state.form.category}
-                disabled={this.props.action === UPDATE_POST}
-              >
+
               {
-                this.props.categories.map(category =>
-                  <option
-                    key={`${category}`}
-                    value={`${category}`}
-                  >{`${firstLetterToUppercase(category)}`}
-                  </option>
-                )
+                this.props.action !== ADD_COMMENT &&
+                <Fragment>
+                  <label
+                    htmlFor='category'
+                    className='label-name'
+                  >
+                    Category
+                  </label>
+                  <select
+                    className={`form-select ${this.state.invalidFields.indexOf('category') > -1 &&
+                      this.state.submitted &&
+                      'form-control--danger'}`
+                    }
+                    id='category'
+                    name='category'
+                    onChange={this.handleChange}
+                    value={this.state.form.category}
+                    disabled={this.props.action === UPDATE_POST}
+                  >
+                  {
+                    this.props.categories.map(category =>
+                      <option
+                        key={`${category}`}
+                        value={`${category}`}
+                      >{`${firstLetterToUppercase(category)}`}
+                      </option>
+                    )
+                  }
+                  </select>
+                </Fragment>
               }
-              </select>
               <button className='form-message__submit'>{this.props.submitButtonLabel}</button>
               {
                 this.props.action === UPDATE_POST && <button type='button' className='form-message__delete' onClick={this.confirmDeletion}>Delete</button>
@@ -246,10 +285,11 @@ class PostForm extends Component {
   }
 }
 
-function mapStateToProps({ categories, posts }, { postId }) {
+function mapStateToProps({ categories, posts, modal }, { postId }) {
   return {
     categories: Object.keys(categories).map(index => categories[index].name),
-    post: posts[postId]
+    post: posts[postId],
+    modal
   };
 }
 

@@ -16,7 +16,10 @@ class Content extends Component {
           path='/:category/:id'
           component={ResponseList}
         />
-        <Route path='/:category/:id' component={PostPage} />
+        <Route
+          path='/:category/:id'
+          component={PostPage}
+        />
 
         {
           Object.keys(this.props.categories).map(index =>

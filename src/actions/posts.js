@@ -1,5 +1,5 @@
 import { generateUID } from '../utils/helper';
-import { savePost, updatePost, removePost, updateVote } from '../utils/api';
+import { savePost, updatePost, replyPost, removePost, updatePostVote } from '../utils/api';
 import { showLoading, hideLoading } from 'react-redux-loading';
 
 export const GET_POSTS = 'GET_POSTS';
@@ -91,7 +91,7 @@ export function handleRemovePost(postId) {
 
 export function handleUpVote(postId) {
   return (dispatch, getState) => {
-    return updateVote(postId, 'upVote')
+    return updatePostVote(postId, 'upVote')
     .then(post => {
       dispatch(upVote(postId))
     })
@@ -104,7 +104,7 @@ export function handleUpVote(postId) {
 
 export function handleDownVote(postId) {
   return (dispatch, getState) => {
-    return updateVote(postId, 'downVote')
+    return updatePostVote(postId, 'downVote')
     .then(post => {
       dispatch(downVote(postId))
     })
