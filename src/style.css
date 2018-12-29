@@ -1361,27 +1361,46 @@ body.open .site-content {
     color: #000;
 }
 
-.card .card__score .score__score-up,
-.card .card__score .score__score-down {
+.score__score-up,
+.score__score-down {
     cursor: pointer;
 }
 
-.card .card__score .score__number {
+.score__vote {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.amount__comment {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.score__number {
     margin: 0 10px 0 10px;
 }
 
-.card .card__comments {
+.card__comments {
     margin: 20px 0 0 0;
     float: right;
     cursor: pointer;
 }
 
-.card .card__comments:hover,
-.card .card__score:hover {
+.card__comments:hover,
+.card__score:hover {
     color: #009688;
 }
 
-.card .card__comments .comments__number {
+.card--right {
+    margin: 0 0 0 0;
+    float: right;
+}
+
+.card--left {
+    float: left;
+}
+
+.comments__number {
     margin: 0 10px 0 10px;
 }
 
