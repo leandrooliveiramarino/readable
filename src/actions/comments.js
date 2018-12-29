@@ -1,6 +1,7 @@
 import { generateUID } from '../utils/helper';
 import { saveComment, updateComment, removeComment, updateCommentVote } from '../utils/api';
 import { showLoading, hideLoading } from 'react-redux-loading';
+import { incrementPostCommentCount, decrementPostCommentCount } from './posts';
 
 export const GET_COMMENTS = 'GET_COMMENTS';
 export const ADD_COMMENT = 'ADD_COMMENT';
@@ -59,10 +60,11 @@ export function handleAddComment(comment, postId) {
   return (dispatch, getState) => {
     dispatch(showLoading());
     return saveComment(comment)
-    .then(comment => {
-      dispatch(_saveComment(comment))
-    })
-    .then(() => dispatch(hideLoading()));
+      .then(comment => {
+        dispatch(_saveComment(comment))
+        dispatch(incrementPostCommentCount(postId));
+      })
+      .then(() => dispatch(hideLoading()));
   }
 }
 
@@ -79,12 +81,13 @@ export function handleUpdateComment(comment, commentId) {
   }
 }
 
-export function handleRemoveComment(commentId) {
+export function handleRemoveComment(commentId, postId) {
   return (dispatch, getState) => {
     dispatch(showLoading());
     return removeComment(commentId)
     .then(comment => {
       dispatch(_removeComment(commentId))
+      dispatch(decrementPostCommentCount(postId));
     })
     .then(() => dispatch(hideLoading()));
   }

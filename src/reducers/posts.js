@@ -1,4 +1,13 @@
-import { GET_POSTS, REMOVE_POST, UPDATE_POST, ADD_POST, UP_VOTE, DOWN_VOTE } from '../actions/posts';
+import {
+  GET_POSTS,
+  REMOVE_POST,
+  UPDATE_POST,
+  ADD_POST,
+  UP_VOTE,
+  DOWN_VOTE,
+  INCREMENT_COMMENT_COUNT,
+  DECREMENT_COMMENT_COUNT
+} from '../actions/posts';
 
 export default function posts(state = {}, action) {
   switch(action.type) {
@@ -65,6 +74,22 @@ export default function posts(state = {}, action) {
         [action.postId]: {
           ...state[action.postId],
           voteScore: --state[action.postId].voteScore
+        }
+      }
+    case INCREMENT_COMMENT_COUNT:
+      return {
+        ...state,
+        [action.postId]: {
+          ...state[action.postId],
+          commentCount: ++state[action.postId].commentCount
+        }
+      }
+    case DECREMENT_COMMENT_COUNT:
+      return {
+        ...state,
+        [action.postId]: {
+          ...state[action.postId],
+          commentCount: --state[action.postId].commentCount
         }
       }
     default:

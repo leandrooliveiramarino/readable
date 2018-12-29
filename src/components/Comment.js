@@ -63,7 +63,7 @@ class Comment extends Component {
           body: this.state.body
         }, this.props.id));
       case REMOVE_COMMENT:
-        return this.props.dispatch(handleRemoveComment(this.props.id));
+        return this.props.dispatch(handleRemoveComment(this.props.id, this.props.parentId));
       default:
         this.props.history.push('/');
     }
@@ -98,7 +98,7 @@ class Comment extends Component {
           <hr />
           <div className='card__text'>
             {
-              this.state.action
+              this.state.action === UPDATE_COMMENT
                 ? <input
                     type='text'
                     name='body'

@@ -8,6 +8,8 @@ export const UPDATE_POST = 'UPDATE_POST';
 export const REMOVE_POST = 'REMOVE_POST';
 export const UP_VOTE = 'UP_VOTE';
 export const DOWN_VOTE = 'DOWN_VOTE';
+export const INCREMENT_COMMENT_COUNT = 'INCREMENT_COMMENT_COUNT';
+export const DECREMENT_COMMENT_COUNT = 'DECREMENT_COMMENT_COUNT';
 
 export function getPosts(posts) {
   return {
@@ -47,6 +49,20 @@ function upVote(postId) {
 function downVote(postId) {
   return {
     type: DOWN_VOTE,
+    postId
+  };
+}
+
+export function incrementPostCommentCount(postId) {
+  return {
+    type: INCREMENT_COMMENT_COUNT,
+    postId
+  };
+}
+
+export function decrementPostCommentCount(postId) {
+  return {
+    type: DECREMENT_COMMENT_COUNT,
     postId
   };
 }
