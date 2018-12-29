@@ -3,6 +3,7 @@ import PostMessage from './PostMessage';
 import PostList from './PostList';
 import ResponseList from './ResponseList';
 import PostPage from './PostPage';
+import NotFound from './NotFound';
 import Header from './Header';
 import { connect } from 'react-redux';
 import { withRouter, Route } from 'react-router-dom';
@@ -12,6 +13,11 @@ class Content extends Component {
     return (
       <div id='content' className='site-content'>
         <Header/>
+        <Route
+          exact
+          path='/not-found'
+          component={NotFound}
+        />
         <Route
           path='/:category/:id'
           component={ResponseList}

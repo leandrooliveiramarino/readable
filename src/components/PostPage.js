@@ -8,8 +8,16 @@ import { UPDATE_POST } from '../actions/posts';
 class PostPage extends Component {
 
   componentDidMount = () => {
+    /**
+     * Se o post não existir, redirecionar usuário para a página 404
+     */
+    if(!this.props.post) {
+      this.props.history.push('/not-found');
+      return;
+    }
+
     this.props.dispatch(hidePostMessage());
-    this.props.dispatch(setPageTitle('post', this.props.posts[this.props.id].title));
+    this.props.dispatch(setPageTitle('post', this.props.post.title));
   }
 
   render() {
@@ -32,7 +40,7 @@ function mapStateToProps({ posts }, props) {
   const { id } = props.match.params;
   return {
     id,
-    posts
+    post: posts[id]
   };
 }
 

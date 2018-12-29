@@ -1614,6 +1614,13 @@ body.open .site-content {
 }
 
 /**
+ * Page 404
+ */
+.page-404 {
+    font-family: 'Montserrat', sans-serif, Arial;
+    text-align: center;
+}
+/**
  * General
  */
 
