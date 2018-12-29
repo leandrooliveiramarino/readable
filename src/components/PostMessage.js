@@ -16,7 +16,7 @@ class PostMessage extends Component {
           this.toPage(this.props.postMessage.postId)}
         }
       >
-        <div className='featured-post-image'>
+        <div className={`featured-post-image ${!this.props.postMessage.show && 'hidden'}`}>
           <blockquote className='post-message'>
             {this.props.postMessage.message}
           </blockquote>

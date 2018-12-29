@@ -12,7 +12,7 @@ class PostList extends Component {
 
   render() {
     return (
-      <div id='blog-wrapper' className={`${!this.props.postMessage.show ? 'blog-wrapper--100' : ''}`}>
+      <div id='blog-wrapper' className={`blog-wrapper ${!this.props.postMessage.show ? ' blog-wrapper--100' : 'blog-wrapper--active'}`}>
         <div className={`blog-holder center-relative ${!this.props.postMessage.show ? 'blog-holder--90' : ''}`}>
           {
             this.postsByCategory(this.props.category)

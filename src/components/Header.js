@@ -18,7 +18,7 @@ class Header extends Component {
 
   render() {
     return (
-      <div className={`header ${!this.props.postMessage.show && 'header--100'}`}>
+      <div className={`header ${!this.props.postMessage.show && 'header--100 header--margin-0'}`}>
         <div className='header__title'>
           <h2 className='header__site-name'>{this.showSiteName()}</h2>
         </div>
