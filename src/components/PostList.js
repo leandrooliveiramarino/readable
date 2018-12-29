@@ -25,15 +25,21 @@ class PostList extends Component {
 
   postsByCategory = category => {
     if(!category) {
+
+      if(!this.props.posts) {
+        return <h4>No posts was found...</h4>;
+      }
+
       return Object.keys(this.props.posts).map(index => (
         <Post key={this.props.posts[index].id} {...this.props.posts[index]} />
       ))
     }
 
-    return Object.keys(this.props.posts).filter(index => {
+    const filteredPosts = Object.keys(this.props.posts).filter(index => {
       return this.props.posts[index].category === category;
-    })
-    .map(index => (
+    });
+
+    return filteredPosts.map(index => (
       <Post key={this.props.posts[index].id} {...this.props.posts[index]} />
     ))
   }
