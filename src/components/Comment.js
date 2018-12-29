@@ -1,16 +1,23 @@
 import React, { Component, Fragment } from 'react';
 import { limitCharacters } from '../utils/helper.js';
 import { showPostMessage } from '../actions/postMessage';
-import { handleUpVote, handleDownVote, handleUpdateComment, UPDATE_COMMENT } from '../actions/comments';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { formatDate } from '../utils/helper';
 import { showModal } from '../actions/modal';
+import {
+  handleUpVote,
+  handleDownVote,
+  handleUpdateComment,
+  handleRemoveComment,
+  UPDATE_COMMENT,
+  REMOVE_COMMENT
+} from '../actions/comments';
 
 class Comment extends Component {
 
   state = {
-    editMode: false,
+    action: null,
     oldBody: '',
     body: ''
   }
@@ -34,26 +41,41 @@ class Comment extends Component {
     this.setState(prevState => ({
       ...prevState,
       oldBody: prevState.body,
-      editMode: true,
+      action: UPDATE_COMMENT,
+    }));
+  }
+
+  handleRemove = () => {
+    this.setState(prevState => ({
+      ...prevState,
+      oldBody: prevState.body,
+      action: REMOVE_COMMENT,
     }));
   }
 
   confirm = () => {
     this.setState(prevState => ({
       ...prevState,
-      editMode: false
+      action: null
     }));
 
-    this.props.dispatch(handleUpdateComment({
-      body: this.state.body
-    }, this.props.id));
+    switch(this.state.action) {
+      case UPDATE_COMMENT:
+        return this.props.dispatch(handleUpdateComment({
+          body: this.state.body
+        }, this.props.id));
+      case REMOVE_COMMENT:
+        return this.props.dispatch(handleRemoveComment(this.props.id));
+      default:
+        this.props.history.push('/');
+    }
   }
 
   cancel = () => {
     this.setState(prevState => ({
       ...prevState,
       body: prevState.oldBody,
-      editMode: false
+      action: null
     }));
   }
 
@@ -78,7 +100,7 @@ class Comment extends Component {
           <hr />
           <div className='card__text'>
             {
-              this.state.editMode
+              this.state.action
                 ? <input
                     type='text'
                     name='body'
@@ -99,14 +121,14 @@ class Comment extends Component {
         </div>
         <div className='card__options'>
           {
-            !this.state.editMode
+            !this.state.action
               ? <Fragment>
-                  <button className='options__remove' type='button'>remove</button>
+                  <button className='options__remove' type='button' onClick={this.handleRemove}>remove</button>
                   <button className='options__edit' type='button' onClick={this.handleEdit}>edit</button>
                 </Fragment>
               : <Fragment>
                   <button className='options__cancel' type='button' onClick={this.cancel}>cancel</button>
-                  <button className='options__save' type='button' onClick={this.confirm}>save</button>
+                  <button className='options__save' type='button' onClick={this.confirm}>proceed</button>
                 </Fragment>
           }
         </div>

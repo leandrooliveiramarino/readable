@@ -149,16 +149,16 @@ export const saveComment = comment =>
   .then(res => res.json())
   .then(data => data);
 
-// export const removeComment = commentId =>
-//   fetch(`${api}/comments/${commentId}`, {
-//     method: 'DELETE',
-//     headers: {
-//       ...headers,
-//       'Content-Type': 'application/json'
-//     }
-//   })
-//   .then(res => res.json())
-//   .then(data => data);
+export const removeComment = commentId =>
+  fetch(`${api}/comments/${commentId}`, {
+    method: 'DELETE',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(res => res.json())
+  .then(data => data);
 
 export const updateComment = (comment, commentId) =>
   fetch(`${api}/comments/${commentId}`, {
@@ -174,21 +174,6 @@ export const updateComment = (comment, commentId) =>
   })
   .then(res => res.json())
   .then(data => data);
-
-// export const replyComment = (comment, parentId) =>
-//   fetch(`${api}/comments/${parentId}`, {
-//     method: 'PUT',
-//     headers: {
-//       ...headers,
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({
-//       body: comment.body,
-//       title: comment.title
-//     })
-//   })
-//   .then(res => res.json())
-//   .then(data => data);
 
 export const updateCommentVote = (commentId, option) =>
   fetch(`${api}/comments/${commentId}`, {

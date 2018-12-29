@@ -30,12 +30,12 @@ function _updateComment(comment) {
   };
 }
 
-// function _removeComment(commentId) {
-//   return {
-//     type: REMOVE_COMMENT,
-//     commentId
-//   };
-// }
+function _removeComment(commentId) {
+  return {
+    type: REMOVE_COMMENT,
+    commentId
+  };
+}
 
 function upVote(commentId) {
   return {
@@ -79,27 +79,16 @@ export function handleUpdateComment(comment, commentId) {
   }
 }
 
-// export function handleReplyComment(comment, parentId) {
-//   return (dispatch, getState) => {
-//     dispatch(showLoading());
-//     return replyComment(comment, parentId)
-//     .then(comment => {
-//       dispatch(_replyComment(comment))
-//     })
-//     .then(() => dispatch(hideLoading()));
-//   }
-// }
-
-// export function handleRemoveComment(commentId) {
-//   return (dispatch, getState) => {
-//     dispatch(showLoading());
-//     return removeComment(commentId)
-//     .then(comment => {
-//       dispatch(_removeComment(commentId))
-//     })
-//     .then(() => dispatch(hideLoading()));
-//   }
-// }
+export function handleRemoveComment(commentId) {
+  return (dispatch, getState) => {
+    dispatch(showLoading());
+    return removeComment(commentId)
+    .then(comment => {
+      dispatch(_removeComment(commentId))
+    })
+    .then(() => dispatch(hideLoading()));
+  }
+}
 
 export function handleUpVote(commentId) {
   return (dispatch, getState) => {

@@ -12,38 +12,38 @@ export default function comments(state = {}, action) {
         ...state,
         [action.comment.id]: action.comment
       }
-    // case REMOVE_COMMENT:
-    //   return {
-    //     /**
-    //      * Lógica para remover o atributo do objeto "comment"
-    //      */
-    //     ...Object.keys(state).reduce((carry, index) => {
+    case REMOVE_COMMENT:
+      return {
+        /**
+         * Lógica para remover o atributo do objeto "comment"
+         */
+        ...Object.keys(state).reduce((carry, index) => {
 
-    //       if(!carry && index !== action.commentId) {
-    //         return {
-    //           [index]: state[index]
-    //         };
-    //       }
+          if(!carry && index !== action.commentId) {
+            return {
+              [index]: state[index]
+            };
+          }
 
-    //       if(!carry && index === action.commentId) {
-    //         return {};
-    //       }
+          if(!carry && index === action.commentId) {
+            return {};
+          }
 
-    //       if(!carry) {
-    //         return {
-    //           [index]: state[index]
-    //         };
-    //       }
+          if(!carry) {
+            return {
+              [index]: state[index]
+            };
+          }
 
-    //       if(index === action.commentId) {
-    //         return carry;
-    //       }
+          if(index === action.commentId) {
+            return carry;
+          }
 
-    //       carry[index] = state[index];
+          carry[index] = state[index];
 
-    //       return carry;
-    //     }, null)
-    //   }
+          return carry;
+        }, null)
+      }
     case UPDATE_COMMENT:
       return {
         ...state,
