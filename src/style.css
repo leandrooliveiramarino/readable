@@ -1604,6 +1604,15 @@ body.open .site-content {
     text-decoration: underline;
     cursor: pointer;
 }
+
+/**
+ * Menu Icons
+ */
+.menu-icon--active {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+
 /**
  * General
  */

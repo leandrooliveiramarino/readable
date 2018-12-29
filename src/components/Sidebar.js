@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 
 const Sidebar = (props) => {
     return (
@@ -15,14 +15,23 @@ const Sidebar = (props) => {
             <div className='social-list'>
             {
               Object.keys(props.categories).map(index => (
-                <Link key={props.categories[index].name} to={`/${props.categories[index].path}`}>
-                  <img
-                    src={`/images/${props.categories[index].name}-icon.png`}
-                    width='25'
-                    height='25'
-                    alt={props.categories[index].name}
-                  />
-                </Link>
+                <Route
+                  key={props.categories[index].name}
+                  path={`/${props.categories[index].path}`}
+                  children={({match}) => {
+                    return (
+                      <Link to={`/${props.categories[index].path}`}>
+                        <img
+                          src={`/images/${props.categories[index].name}-icon.png`}
+                          width='25'
+                          height='25'
+                          alt={props.categories[index].name}
+                          className={!match ? 'menu-icon--active' : ''}
+                        />
+                      </Link>
+                    )
+                  }}
+                />
               ))
             }
             </div>
