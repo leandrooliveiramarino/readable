@@ -9,7 +9,7 @@ export default function modal (state = {}, action) {
         action: action.action,
         title: action.title,
         submitButtonLabel: action.submitButtonLabel,
-        parentId: action.parentId,
+        parentId: action.parentId
       };
     case HIDE_MODAL:
       return {

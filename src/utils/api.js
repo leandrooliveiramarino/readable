@@ -160,20 +160,20 @@ export const saveComment = comment =>
 //   .then(res => res.json())
 //   .then(data => data);
 
-// export const updateComment = (comment, commentId) =>
-//   fetch(`${api}/comments/${commentId}`, {
-//     method: 'PUT',
-//     headers: {
-//       ...headers,
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({
-//       body: comment.body,
-//       title: comment.title
-//     })
-//   })
-//   .then(res => res.json())
-//   .then(data => data);
+export const updateComment = (comment, commentId) =>
+  fetch(`${api}/comments/${commentId}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      body: comment.body,
+      timestamp: comment.timestamp
+    })
+  })
+  .then(res => res.json())
+  .then(data => data);
 
 // export const replyComment = (comment, parentId) =>
 //   fetch(`${api}/comments/${parentId}`, {

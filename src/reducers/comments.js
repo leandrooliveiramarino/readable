@@ -44,13 +44,13 @@ export default function comments(state = {}, action) {
     //       return carry;
     //     }, null)
     //   }
-    // case UPDATE_COMMENT:
-    //   return {
-    //     ...state,
-    //     [action.comment.id]: {
-    //       ...action.comment
-    //     }
-    //   }
+    case UPDATE_COMMENT:
+      return {
+        ...state,
+        [action.comment.id]: {
+          ...action.comment
+        }
+      }
     case UP_VOTE_COMMENT:
       return {
         ...state,

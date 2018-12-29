@@ -23,12 +23,12 @@ function _saveComment(comment) {
   };
 }
 
-// function _updateComment(comment) {
-//   return {
-//     type: UPDATE_COMMENT,
-//     comment
-//   };
-// }
+function _updateComment(comment) {
+  return {
+    type: UPDATE_COMMENT,
+    comment
+  };
+}
 
 // function _removeComment(commentId) {
 //   return {
@@ -66,16 +66,18 @@ export function handleAddComment(comment, postId) {
   }
 }
 
-// export function handleUpdateComment(comment, commentId) {
-//   return (dispatch, getState) => {
-//     dispatch(showLoading());
-//     return updateComment(comment, commentId)
-//     .then(comment => {
-//       dispatch(_updateComment(comment))
-//     })
-//     .then(() => dispatch(hideLoading()));
-//   }
-// }
+export function handleUpdateComment(comment, commentId) {
+  comment.timestamp = new Date().getTime();
+
+  return (dispatch, getState) => {
+    dispatch(showLoading());
+    return updateComment(comment, commentId)
+    .then(comment => {
+      dispatch(_updateComment(comment))
+    })
+    .then(() => dispatch(hideLoading()));
+  }
+}
 
 // export function handleReplyComment(comment, parentId) {
 //   return (dispatch, getState) => {

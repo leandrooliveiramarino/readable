@@ -228,6 +228,7 @@ class PostForm extends Component {
                 id='message'
                 placeholder='Message'
                 value={this.state.form.body}
+                maxLength={150}
                 onChange={this.handleChange}
               >
               </textarea>

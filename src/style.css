@@ -762,8 +762,7 @@ body.open .site-content {
 
 .form-message {
     max-width: 100%;
-    margin: 0 auto;
-    min-height: 600px;
+    margin: 0 auto 40px auto;
 }
 
 .form-message input[type=text], .form-message input[type=email], .form-message textarea {
@@ -1326,10 +1325,40 @@ body.open .site-content {
     width: 100%;
 }
 
+.card__text--edit {
+    border: 1px solid #CECECE;
+    padding-left: 20px;
+    width: 100%;
+}
+
 .card .card__score {
     padding: 0;
     margin: 20px 0 0 0;
     float: left;
+}
+
+.card .card__options {
+    padding: 0;
+    margin: 20px 0 0 0;
+    float: right;
+}
+
+.card .options__remove,
+.card .options__edit,
+.card .options__save,
+.card .options__cancel {
+    font-family: 'Montserrat', sans-serif, Arial;
+    color: #00695f;
+    background-color: #FFF;
+    border: 0;
+    cursor: pointer;
+}
+
+.card .options__remove:hover,
+.card .options__edit:hover,
+.card .options__save:hover,
+.card .options__cancel:hover {
+    color: #000;
 }
 
 .card .card__score .score__score-up,
