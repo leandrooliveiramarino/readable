@@ -1376,6 +1376,11 @@ body.open .site-content {
     cursor: pointer;
 }
 
+.card .card__comments:hover,
+.card .card__score:hover {
+    color: #009688;
+}
+
 .card .card__comments .comments__number {
     margin: 0 10px 0 10px;
 }

@@ -31,23 +31,28 @@ class PostList extends Component {
   }
 
   postsByCategory = category => {
-    if(!category) {
+    const postsAvailable = this.props.posts || {} ;
 
-      if(!this.props.posts) {
+    if(!category) {
+      if(!Object.keys(postsAvailable).length) {
         return <h4>No posts was found...</h4>;
       }
 
-      return Object.keys(this.props.posts).map(index => (
-        <Post key={this.props.posts[index].id} {...this.props.posts[index]} />
+      return Object.keys(postsAvailable).map(index => (
+        <Post key={postsAvailable[index].id} {...postsAvailable[index]} />
       ))
     }
 
-    const filteredPosts = Object.keys(this.props.posts).filter(index => {
-      return this.props.posts[index].category === category;
+    const filteredPosts = Object.keys(postsAvailable).filter(index => {
+      return postsAvailable[index].category === category;
     });
 
+    if(!Object.keys(filteredPosts).length) {
+      return <h4>No posts was found...</h4>;
+    }
+
     return filteredPosts.map(index => (
-      <Post key={this.props.posts[index].id} {...this.props.posts[index]} />
+      <Post key={postsAvailable[index].id} {...postsAvailable[index]} />
     ))
   }
 }
