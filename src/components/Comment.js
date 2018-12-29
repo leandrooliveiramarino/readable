@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { limitCharacters } from '../utils/helper.js';
 import { showPostMessage } from '../actions/postMessage';
-import { handleUpVote, handleDownVote } from '../actions/posts';
+import { handleUpVote, handleDownVote } from '../actions/comments';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { formatDate } from '../utils/helper';

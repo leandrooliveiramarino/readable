@@ -190,16 +190,16 @@ export const saveComment = comment =>
 //   .then(res => res.json())
 //   .then(data => data);
 
-// export const updateCommentVote = (commentId, option) =>
-//   fetch(`${api}/comments/${commentId}`, {
-//     method: 'POST',
-//     headers: {
-//       ...headers,
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({
-//       option
-//     })
-//   })
-//   .then(res => res.json())
-//   .then(data => data);
+export const updateCommentVote = (commentId, option) =>
+  fetch(`${api}/comments/${commentId}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      option
+    })
+  })
+  .then(res => res.json())
+  .then(data => data);

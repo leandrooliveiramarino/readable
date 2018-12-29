@@ -6,8 +6,8 @@ export const GET_COMMENTS = 'GET_COMMENTS';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const UPDATE_COMMENT = 'UPDATE_COMMENT';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
-export const UP_VOTE = 'UP_VOTE';
-export const DOWN_VOTE = 'DOWN_VOTE';
+export const UP_VOTE_COMMENT = 'UP_VOTE_COMMENT';
+export const DOWN_VOTE_COMMENT = 'DOWN_VOTE_COMMENT';
 
 export function getComments(comments) {
   return {
@@ -37,19 +37,19 @@ function _saveComment(comment) {
 //   };
 // }
 
-// function upVote(commentId) {
-//   return {
-//     type: UP_VOTE,
-//     commentId
-//   };
-// }
+function upVote(commentId) {
+  return {
+    type: UP_VOTE_COMMENT,
+    commentId
+  };
+}
 
-// function downVote(commentId) {
-//   return {
-//     type: DOWN_VOTE,
-//     commentId
-//   };
-// }
+function downVote(commentId) {
+  return {
+    type: DOWN_VOTE_COMMENT,
+    commentId
+  };
+}
 
 export function handleAddComment(comment, postId) {
   comment.id = generateUID();
@@ -99,28 +99,28 @@ export function handleAddComment(comment, postId) {
 //   }
 // }
 
-// export function handleUpVote(commentId) {
-//   return (dispatch, getState) => {
-//     return updatePostVote(commentId, 'upVote')
-//     .then(comment => {
-//       dispatch(upVote(commentId))
-//     })
-//     .catch((e) => {
-//       alert('There was an error voting the comment. Try again.');
-//       dispatch(downVote(commentId))
-//     });
-//   }
-// }
+export function handleUpVote(commentId) {
+  return (dispatch, getState) => {
+    return updateCommentVote(commentId, 'upVote')
+    .then(comment => {
+      dispatch(upVote(commentId))
+    })
+    .catch((e) => {
+      alert('There was an error voting the comment. Try again.');
+      dispatch(downVote(commentId))
+    });
+  }
+}
 
-// export function handleDownVote(commentId) {
-//   return (dispatch, getState) => {
-//     return updatePostVote(commentId, 'downVote')
-//     .then(comment => {
-//       dispatch(downVote(commentId))
-//     })
-//     .catch((e) => {
-//       alert('There was an error voting the comment. Try again.');
-//       dispatch(upVote(commentId))
-//     });
-//   }
-// }
+export function handleDownVote(commentId) {
+  return (dispatch, getState) => {
+    return updateCommentVote(commentId, 'downVote')
+    .then(comment => {
+      dispatch(downVote(commentId))
+    })
+    .catch((e) => {
+      alert('There was an error voting the comment. Try again.');
+      dispatch(upVote(commentId))
+    });
+  }
+}

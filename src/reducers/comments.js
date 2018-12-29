@@ -1,4 +1,4 @@
-import { GET_COMMENTS, REMOVE_COMMENT, UPDATE_COMMENT, ADD_COMMENT, UP_VOTE, DOWN_VOTE } from '../actions/comments';
+import { GET_COMMENTS, REMOVE_COMMENT, UPDATE_COMMENT, ADD_COMMENT, UP_VOTE_COMMENT, DOWN_VOTE_COMMENT } from '../actions/comments';
 
 export default function comments(state = {}, action) {
   switch(action.type) {
@@ -51,22 +51,22 @@ export default function comments(state = {}, action) {
     //       ...action.comment
     //     }
     //   }
-    // case UP_VOTE:
-    //   return {
-    //     ...state,
-    //     [action.commentId]: {
-    //       ...state[action.commentId],
-    //       voteScore: ++state[action.commentId].voteScore
-    //     }
-    //   }
-    // case DOWN_VOTE:
-    //   return {
-    //     ...state,
-    //     [action.commentId]: {
-    //       ...state[action.commentId],
-    //       voteScore: --state[action.commentId].voteScore
-    //     }
-    //   }
+    case UP_VOTE_COMMENT:
+      return {
+        ...state,
+        [action.commentId]: {
+          ...state[action.commentId],
+          voteScore: ++state[action.commentId].voteScore
+        }
+      }
+    case DOWN_VOTE_COMMENT:
+      return {
+        ...state,
+        [action.commentId]: {
+          ...state[action.commentId],
+          voteScore: --state[action.commentId].voteScore
+        }
+      }
     default:
       return state;
   }

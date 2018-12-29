@@ -106,7 +106,7 @@ class PostForm extends Component {
         break;
       case UPDATE_POST:
         this.props.dispatch(handleUpdatePost(form, this.props.post.id));
-        this.props.history.push('/');
+        this.hideSubmitMessage();
         break;
       case REMOVE_POST:
         this.props.dispatch(handleRemovePost(this.props.post.id));
