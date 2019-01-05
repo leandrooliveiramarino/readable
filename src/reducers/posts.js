@@ -65,7 +65,7 @@ export default function posts(state = {}, action) {
         ...state,
         [action.postId]: {
           ...state[action.postId],
-          voteScore: ++state[action.postId].voteScore
+          voteScore: state[action.postId].voteScore + 1
         }
       }
     case DOWN_VOTE:
@@ -73,7 +73,7 @@ export default function posts(state = {}, action) {
         ...state,
         [action.postId]: {
           ...state[action.postId],
-          voteScore: --state[action.postId].voteScore
+          voteScore: state[action.postId].voteScore - 1
         }
       }
     case INCREMENT_COMMENT_COUNT:
@@ -81,7 +81,7 @@ export default function posts(state = {}, action) {
         ...state,
         [action.postId]: {
           ...state[action.postId],
-          commentCount: ++state[action.postId].commentCount
+          commentCount: state[action.postId].commentCount + 1
         }
       }
     case DECREMENT_COMMENT_COUNT:
@@ -89,7 +89,7 @@ export default function posts(state = {}, action) {
         ...state,
         [action.postId]: {
           ...state[action.postId],
-          commentCount: --state[action.postId].commentCount
+          commentCount: state[action.postId].commentCount - 1
         }
       }
     default:

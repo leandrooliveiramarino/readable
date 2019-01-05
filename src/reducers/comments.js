@@ -56,7 +56,7 @@ export default function comments(state = {}, action) {
         ...state,
         [action.commentId]: {
           ...state[action.commentId],
-          voteScore: ++state[action.commentId].voteScore
+          voteScore: state[action.commentId].voteScore + 1
         }
       }
     case DOWN_VOTE_COMMENT:
@@ -64,7 +64,7 @@ export default function comments(state = {}, action) {
         ...state,
         [action.commentId]: {
           ...state[action.commentId],
-          voteScore: --state[action.commentId].voteScore
+          voteScore: state[action.commentId].voteScore - 1
         }
       }
     default:
