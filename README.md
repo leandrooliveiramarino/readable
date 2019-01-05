@@ -12,10 +12,21 @@ npm start
 
 ### Prerequisites
 
-This project was developed using `Node.js` version 11.0.0 and `NPM` version 6.4.1.
+This project was developed using `Node.js` version 11.0.0, `NPM` version 6.4.1 and the following API.
 
-##### The API
-The API inside the folder `readable-api` is required. Please, see the documentation inside the folder to install and run it.
+
+### The API
+
+The API inside the folder `api-server` was developed by the Udacity team, and it's required. Please, see the instructions in the `API instruction` section to install and run it.
+
+
+#### API instructions
+
+* Install and start the API server
+    - `cd api-server`
+    - `npm install`
+    - `node server`
+
 
 ## Deployment
 
