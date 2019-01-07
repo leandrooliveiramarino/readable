@@ -25,8 +25,8 @@ class ResponseList extends Component {
         <div className={`blog-holder center-relative`}>
           {
             this.props.filteredComments.length
-              ? this.props.filteredComments.map(index => (
-                  <Comment key={index} {...this.props.comments[index]} />
+              ? this.props.filteredComments.map(commentId => (
+                  <Comment key={commentId} {...this.props.comments[commentId]} />
                 ))
               : <h4>There are no comments for this post...</h4>
           }
