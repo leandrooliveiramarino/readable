@@ -32,30 +32,19 @@ class Content extends Component {
           path='/:category/:id'
           component={PostPage}
         />
-
-        {
-          Object.keys(this.props.categories).map(index =>
-            <Route
-              exact
-              key={`${this.props.categories[index].path}`}
-              path={`/${this.props.categories[index].path}`}
-              render={() => <PostList category={this.props.categories[index].name}/>}
-            />
-          )
-        }
+        <Route
+          exact
+          path='/:category'
+          render={props => <PostList category={props.match.params.category} />}
+        />
         <Route exact path='/' render={() => <PostList category={null}/>} />
 
         <Route exact path='/' component={PostMessage} />
-        {
-          Object.keys(this.props.categories).map(index =>
-            <Route
-              exact
-              key={`${this.props.categories[index].path}`}
-              path={`/${this.props.categories[index].path}`}
-              component={PostMessage}
-            />
-          )
-        }
+        <Route
+          exact
+          path='/:category'
+          component={PostMessage}
+        />
         <div className='clear'></div>
       </div>
     );

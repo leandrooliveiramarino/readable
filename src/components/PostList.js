@@ -17,6 +17,12 @@ class PostList extends Component {
     this.props.dispatch(setPageTitle(this.props.category));
   }
 
+  componentDidUpdate = prevProps => {
+    if(prevProps.category !== this.props.category) {
+      this.props.dispatch(setPageTitle(this.props.category));
+    }
+  }
+
   render() {
     return (
       <div id='blog-wrapper' className={`blog-wrapper ${!this.props.postMessage.show ? ' blog-wrapper--100' : 'blog-wrapper--active'}`}>
