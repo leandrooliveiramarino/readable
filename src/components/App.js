@@ -15,7 +15,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(handleInitialData());
+    this.props.handleInitialData();
   }
 
   render() {
@@ -46,4 +46,10 @@ function mapStateToProps({ authedUser, categories }) {
   };
 }
 
-export default connect(mapStateToProps)(App);
+function mapDispatchToProps(dispatch) {
+  return {
+    handleInitialData: () => dispatch(handleInitialData())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
