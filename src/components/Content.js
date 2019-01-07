@@ -6,7 +6,7 @@ import PostPage from './PostPage';
 import NotFound from './NotFound';
 import Header from './Header';
 import { connect } from 'react-redux';
-import { withRouter, Route } from 'react-router-dom';
+import { withRouter, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class Content extends Component {
@@ -19,11 +19,24 @@ class Content extends Component {
     return (
       <div id='content' className='site-content'>
         <Header/>
-        <Route
-          exact
-          path='/not-found'
-          component={NotFound}
-        />
+        {
+          /**
+           * Prevenindo a renderização das duas situações seguintes simultaneamente
+           */
+        }
+        <Switch>
+          <Route
+            exact
+            path='/not-found'
+            component={NotFound}
+          />
+          <Route
+            exact
+            path='/:category'
+            render={props => <PostList category={props.match.params.category} />}
+          />
+        </Switch>
+
         <Route
           path='/:category/:id'
           component={ResponseList}
@@ -31,11 +44,6 @@ class Content extends Component {
         <Route
           path='/:category/:id'
           component={PostPage}
-        />
-        <Route
-          exact
-          path='/:category'
-          render={props => <PostList category={props.match.params.category} />}
         />
         <Route exact path='/' render={() => <PostList category={null}/>} />
 
