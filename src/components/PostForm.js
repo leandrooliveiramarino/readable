@@ -128,6 +128,7 @@ class PostForm extends Component {
       case ADD_COMMENT:
         this.props.dispatch(handleAddComment(form, this.state.answerPostId));
         this.props.dispatch(hideModal());
+        this.cleanInputFields();
         break;
       default:
         this.props.history.push('/');
