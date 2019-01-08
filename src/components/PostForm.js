@@ -17,6 +17,7 @@ import {
   handleAddComment,
   ADD_COMMENT
 } from '../actions/comments';
+import { setPageTitle } from '../actions/page';
 import PropTypes from 'prop-types';
 
 class PostForm extends Component {
@@ -119,6 +120,7 @@ class PostForm extends Component {
         break;
       case UPDATE_POST:
         this.props.dispatch(handleUpdatePost(form, this.props.post.id));
+        this.props.dispatch(setPageTitle('post', form.title));
         this.hideSubmitMessage();
         break;
       case REMOVE_POST:
