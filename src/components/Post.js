@@ -29,7 +29,7 @@ class Post extends Component {
     /**
      * Ao clicar nos elementos discriminados na constante "exceptParents", o evento de exibir a mensagem não será despachado
      */
-    const exceptParents = ['.card__score', '.card__comments'];
+    const exceptParents = ['.card__score', '.card__comments', '.card__twitter-share'];
     const proceedIntent = !exceptParents.filter(element => clickedElement.closest(element)).length;
 
     if(proceedIntent && !this.props.redirectWhenClicked) {
@@ -62,6 +62,7 @@ class Post extends Component {
         className={`card ${this.props.postMessage.postId === this.props.id ? 'card--active' : ''}`}
         onClick={this.showPostMessage}
       >
+        <button type='button' className='card__twitter-share' value='share on Twitter' onClick={() => this.shareOnTwitter(this.props.author, this.props.title, this.props.body)}/>
         <div className='card__content'>
           <h2 className='content__title'>{limitCharacters(this.props.title, 25)}</h2>
           <small className='content__info'><b>Posted by:</b> {this.props.author}</small>
@@ -84,6 +85,23 @@ class Post extends Component {
       </div>
     );
   }
+
+  shareOnTwitter = (authorName, postTitle, postBody) => {
+    const hashtags = [
+      'udacity',
+      'readable',
+      'project',
+      'leandroMarino'
+    ];
+    const text = `${authorName} just posted \n\n"${postTitle}\n${postBody}"\n\n on Leandro's Readable project`;
+    const shareURL = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&hashtags=${hashtags.join(',')}`;
+
+    window.open(
+      shareURL,
+      '',
+      'left=0,top=0,width=550,height=450,personalbar=0,toolbar=0,scrollbars=0,resizable=0'
+    )
+  };
 }
 
 function mapStateToProps({ postMessage }) {
