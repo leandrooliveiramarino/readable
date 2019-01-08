@@ -1278,13 +1278,10 @@ body.open .site-content {
     position: relative;
 }
 
-.card__twitter-share {
+.card-share {
     position: absolute;
-    top: -15px;
-    right: -10px;
     height: 30px;
     width: 30px;
-    background-image: url('/images/twitter-icon-share.png');
     border: 0;
     background-color: #FFF;
     cursor: pointer;
@@ -1293,7 +1290,19 @@ body.open .site-content {
     filter: grayscale(100%);
 }
 
-.card__twitter-share:hover {
+.card-share__twitter {
+    background-image: url('/images/twitter-icon-share.png');
+    top: -15px;
+    right: -10px;
+}
+
+.card-share__facebook {
+    background-image: url('/images/facebook-icon-share.png');
+    top: 20px;
+    right: -10px;
+}
+
+.card-share:hover {
     transition: 1s filter;
     -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
     filter: grayscale(0%);

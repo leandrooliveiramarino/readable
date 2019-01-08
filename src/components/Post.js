@@ -29,7 +29,7 @@ class Post extends Component {
     /**
      * Ao clicar nos elementos discriminados na constante "exceptParents", o evento de exibir a mensagem não será despachado
      */
-    const exceptParents = ['.card__score', '.card__comments', '.card__twitter-share'];
+    const exceptParents = ['.card__score', '.card__comments', '.card-share'];
     const proceedIntent = !exceptParents.filter(element => clickedElement.closest(element)).length;
 
     if(proceedIntent && !this.props.redirectWhenClicked) {
@@ -62,7 +62,15 @@ class Post extends Component {
         className={`card ${this.props.postMessage.postId === this.props.id ? 'card--active' : ''}`}
         onClick={this.showPostMessage}
       >
-        <button type='button' className='card__twitter-share' value='share on Twitter' onClick={() => this.shareOnTwitter(this.props.author, this.props.title, this.props.body)}/>
+        <button type='button' className='card-share card-share__twitter' value='Share on Twitter' onClick={() => this.shareOnTwitter(this.props.author, this.props.title, this.props.body)}/>
+        <Link
+          target='_blank'
+          to={{
+            pathname: `https://www.facebook.com/sharer/sharer.php?u=${document.location.href}${this.props.category}/${this.props.id}`
+          }}
+          className='card-share card-share__facebook'
+          alt='Share on Facebook'
+        />
         <div className='card__content'>
           <h2 className='content__title'>{limitCharacters(this.props.title, 25)}</h2>
           <small className='content__info'><b>Posted by:</b> {this.props.author}</small>
